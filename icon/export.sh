@@ -7,6 +7,7 @@ generate_png () {
 }
 
 # Call the function.
+generate_png 35
 generate_png 64
 generate_png 128
 generate_png 512
