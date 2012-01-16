@@ -4,4 +4,7 @@ syntax: glob
 *.png
 *~
 *.pro.user
-
+*.o
+*moc_*
+Makefile
+korgi
