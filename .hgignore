@@ -3,4 +3,5 @@ syntax: glob
 *.directory
 *.png
 *~
+*.pro.user
 
