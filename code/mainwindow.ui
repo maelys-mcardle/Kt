@@ -27,6 +27,12 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QScrollArea" name="scrollDesigner">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="widgetResizable">
            <bool>true</bool>
           </property>
@@ -43,9 +49,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QScrollArea" name="scrollWidgets">
+         <widget class="QScrollArea" name="scrollWidgetList">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -53,7 +59,7 @@
           <property name="widgetResizable">
            <bool>true</bool>
           </property>
-          <widget class="QWidget" name="scrollAreaWidgets">
+          <widget class="QWidget" name="scrollAreaWidgetList">
            <property name="geometry">
             <rect>
              <x>0</x>
@@ -62,6 +68,31 @@
              <height>351</height>
             </rect>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="layoutWidgetList">
+              <property name="margin">
+               <number>5</number>
+              </property>
+             </layout>
+            </item>
+            <item>
+             <spacer name="spacerWidgetList">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
