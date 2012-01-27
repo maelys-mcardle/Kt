@@ -11,8 +11,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    generictype.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    generictype.h
 
 FORMS    += mainwindow.ui

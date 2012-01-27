@@ -6,5 +6,6 @@ syntax: glob
 *.pro.user
 *.o
 *moc_*
+korgi-build-desktop/*
 Makefile
 korgi
