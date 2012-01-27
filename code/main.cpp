@@ -1,14 +1,11 @@
 #include <QtGui/QApplication>
-#include "qmlapplicationviewer.h"
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
 
-    QmlApplicationViewer viewer;
-    viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-    viewer.setMainQmlFile(QLatin1String("qml/korgi/main.qml"));
-    viewer.showExpanded();
-
-    return app.exec();
+    return a.exec();
 }
