@@ -1,11 +1,19 @@
 #include <QtGui/QApplication>
-#include "mainwindow.h"
+#include <QWebView>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
 
+	// Create the surface to load the HTML5/JavaScript front-end.
+	QWebView *view = new QWebView(0);
+	view->load(QUrl("http://qt.nokia.com/"));
+
+	// Set window properties.
+	view->setBaseSize(640, 480);
+	view->setWindowTitle("Korgi");
+
+	// Execute and return status on close.
+	view->show();
     return a.exec();
 }
