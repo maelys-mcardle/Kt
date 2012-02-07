@@ -1,5 +1,6 @@
 #include <QtGui/QApplication>
 #include <QWebView>
+#include <QWebFrame>
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,12 @@ int main(int argc, char *argv[])
 	// Set window properties.
 	view->setBaseSize(640, 480);
 	view->setWindowTitle("Korgi");
+	
+	// Disable scrollbars.
+	view->page()->mainFrame()->
+		setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
+	view->page()->mainFrame()->
+		setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
 
 	// Execute and return status on close.
 	view->show();
