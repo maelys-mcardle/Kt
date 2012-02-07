@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 
 	// Create the surface to load the HTML5/JavaScript front-end.
 	QWebView *view = new QWebView(0);
-	view->load(QUrl("http://qt.nokia.com/"));
+	view->load(QUrl("frontend/index.htm"));
 
 	// Set window properties.
 	view->setBaseSize(640, 480);
