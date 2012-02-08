@@ -6,12 +6,20 @@
 var kStyle = 
 {
 	background: {
-		fill: "white", 
-		stroke: "red"
+		fill: "#212121", 
+		stroke: 0,
+		lineWidth: 3
 	},
 	
 	rectangle: {
 		fill: "red",
-		stroke: "red"
+		stroke: "white",
+		lineWidth: 3
+	},
+	
+	other: {
+		fill: "blue",
+		stroke: 0,
+		lineWidth: 3
 	}
 };
