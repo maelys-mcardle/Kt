@@ -1,25 +1,20 @@
-// kStyle
-// ---------------------------------------------------------------------
-// This contains the styles used throughout the application to define
-// the look of items.
-
 var kStyle = 
 {
 	background: {
-		fill: "#212121", 
-		stroke: 0,
-		lineWidth: 3
+		fillColour: "#212121", 
+		lineColour: 0,
+		lineWidth: 0
 	},
 	
 	rectangle: {
-		fill: "red",
-		stroke: "white",
+		fillColour: "red",
+		lineColour: "white",
 		lineWidth: 3
 	},
 	
 	other: {
-		fill: "blue",
-		stroke: 0,
+		fillColour: "blue",
+		lineColour: 0,
 		lineWidth: 3
 	}
 };
