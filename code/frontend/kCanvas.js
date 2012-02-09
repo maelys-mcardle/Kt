@@ -1,5 +1,5 @@
 // =====================================================================
-// CONSTRUCTOR
+// BASE FUNCTION
 // =====================================================================
 
 function kCanvas()
@@ -68,35 +68,63 @@ function(x, y, width, height, radius, style)
 }
 
 kCanvas.prototype.drawLine = 
-function(x1, y1, x2, y2, style)
+function(x, y, xDelta, yDelta, style)
 {
 	// Load the style data.
 	this.loadStyle(style);
 	
 	// Define the line.
 	this.context.beginPath();
-	this.context.moveTo(x1, y1);
-	this.context.lineTo(x2, y2);
+	this.context.moveTo(x, y);
+	this.context.lineTo(x + xDelta, y + yDelta);
 	this.context.closePath();
 	
 	// Draw the line.
 	this.context.stroke();
 }
 
-kCanvas.prototype.drawLine = 
-function(coordinates, style)
+kCanvas.prototype.drawLines = 
+function(x, y, deltaCoordinates, style)
 {
 	// Load the style data.
 	this.loadStyle(style);
 	
-	// Define the line.
+	// Start the line path and go to the start coordinates.
 	this.context.beginPath();
-	//this.context.moveTo(x1, y1);
-	//this.context.lineTo(x2, y2);
-	this.context.closePath();
+	this.context.moveTo(x, y);
 	
-	// Draw the line.
+	// Go through each coordinate.
+	for (var i = 0; i < deltaCoordinates.length; i++)
+		this.context.lineTo(x + deltaCoordinates[i][0], 
+			y + deltaCoordinates[i][1]);
+
+	// End and draw the line.
+	this.context.closePath();
 	this.context.stroke();
+}
+
+kCanvas.prototype.drawPolygon = 
+function(x, y, deltaCoordinates, style)
+{
+	// Load the style data.
+	this.loadStyle(style);
+	
+	// Start the line path and go to the start coordinates.
+	this.context.beginPath();
+	this.context.moveTo(x, y);
+	
+	// Go through each coordinate.
+	for (var i = 0; i < deltaCoordinates.length; i++)
+		this.context.lineTo(x + deltaCoordinates[i][0], 
+			y + deltaCoordinates[i][1]);
+
+	// End and draw the line.
+	this.context.lineTo(x, y);
+	this.context.closePath();
+
+	// Draw the polygon.
+	if (style.fillColour) this.context.fill();
+	if (style.lineColour) this.context.stroke();
 }
 
 kCanvas.prototype.drawText = 
