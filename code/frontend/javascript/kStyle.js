@@ -12,9 +12,10 @@ var kStyle =
 		lineWidth: 3
 	},
 	
-	other: {
-		fillColour: "blue",
-		lineColour: 0,
-		lineWidth: 3
+	text: {
+		fillColour: "white",
+		lineColour: "white",
+		lineWidth: 3,
+		font: "50px Vegur"
 	}
 };

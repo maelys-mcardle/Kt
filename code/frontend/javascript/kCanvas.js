@@ -26,6 +26,7 @@ function(style)
 	this.context.strokeStyle = style.lineColour;
 	this.context.lineWidth   = style.lineWidth;
 	this.context.fillStyle   = style.fillColour;
+	this.context.font        = style.font;
 }	
 
 // =====================================================================
@@ -127,12 +128,6 @@ function(x, y, deltaCoordinates, style)
 	if (style.lineColour) this.context.stroke();
 }
 
-kCanvas.prototype.drawText = 
-function(x, y, width, height, style)
-{
-	this.loadStyle(style);
-}
-
 // =====================================================================
 // DRAW COMPLEX PRIMITIVES (DEPEND ON BASIC PRIMITIVES)
 // =====================================================================
@@ -143,5 +138,23 @@ function(style)
 	// A background is just a rectangle that fills the screen. 
 	this.drawRectangle(0, 0, this.canvas.width, 
 		this.canvas.height, style);
+}
+
+// =====================================================================
+// DRAW TEXT
+// =====================================================================
+
+kCanvas.prototype.drawText = 
+function(x, y, maximumWidth, maximumHeight, text, style)
+{
+	// Load the style.
+	this.loadStyle(style);
+	
+	// Define the Y coordinate as refering to the top of the element,
+	// akin to all the other primitives.
+	this.context.textBaseline = "top";
+	
+	// Display the text.
+	this.context.fillText(text, x, y);
 }
 
