@@ -151,10 +151,28 @@ function(x, y, text, style)
 	this.loadStyle(style);
 	
 	// Define the Y coordinate as refering to the top of the element,
-	// akin to all the other primitives.
+	// like the other primitives.
 	this.context.textBaseline = "top";
-
+	
 	// Display the text.
 	this.context.fillText(text, x, y);
 }
 
+kCanvas.prototype.drawBoundedText = 
+function(x, y, width, height, text, style)
+{
+	// Load the style.
+	this.loadStyle(style);
+	
+	// Define the Y coordinate as refering to the top of the element,
+	// like the other primitives.
+	this.context.textBaseline = "top";
+	
+	// Measure the text.
+	var textWidth = this.context.measureText(text);
+	
+	
+		
+	// Display the text.
+	this.context.fillText(text, x, y);
+}

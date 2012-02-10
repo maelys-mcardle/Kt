@@ -10,5 +10,6 @@ function main()
 	canvas.drawLines(200, 100, [[10,10],[15,5],[4,3]], kStyle.rectangle);
 	canvas.drawPolygon(300, 100, [[0,10],[20,30],[100,50]], kStyle.rectangle);
 	canvas.drawText(400,10,"Heeeey!", kStyle.text);
+	canvas.drawBoundedText(400,200,200,200,"Julien", kStyle.text);
 	setTimeout(main, 100);
 }
