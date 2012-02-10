@@ -145,7 +145,7 @@ function(style)
 // =====================================================================
 
 kCanvas.prototype.drawText = 
-function(x, y, maximumWidth, maximumHeight, text, style)
+function(x, y, text, style)
 {
 	// Load the style.
 	this.loadStyle(style);
@@ -153,7 +153,7 @@ function(x, y, maximumWidth, maximumHeight, text, style)
 	// Define the Y coordinate as refering to the top of the element,
 	// akin to all the other primitives.
 	this.context.textBaseline = "top";
-	
+
 	// Display the text.
 	this.context.fillText(text, x, y);
 }
