@@ -1,4 +1,4 @@
-var kAlign = 
+const kAlign = 
 {
 	topLeft:     0,
 	top:         1,

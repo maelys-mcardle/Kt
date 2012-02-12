@@ -1,4 +1,4 @@
-var kWrap = 
+const kWrap = 
 {
 	noWrap: 0,
 	wrapOnCharacters: 1,

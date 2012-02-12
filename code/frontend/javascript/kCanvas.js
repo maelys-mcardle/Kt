@@ -26,7 +26,7 @@ function(style)
 	this.context.strokeStyle = style.lineColour;
 	this.context.lineWidth   = style.lineWidth;
 	this.context.fillStyle   = style.fillColour;
-	this.context.font        = style.fontHeight + "px " + style.font;
+	this.context.font        = style.textHeight + "px " + style.textFont;
 }	
 
 // =====================================================================
