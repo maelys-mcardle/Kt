@@ -168,7 +168,7 @@ function(x, y, text, style)
 }
 
 kCanvas.prototype.drawBoundedText = 
-function(x, y, width, height, text, wrapType, style)
+function(x, y, width, height, text, style)
 {
 	// Load the style.
 	this.loadStyle(style);
@@ -189,6 +189,7 @@ function(x, y, width, height, text, wrapType, style)
 	// If the text is too big to fit, use quicksort to figure out the
 	// correct size.
 	
+	
 	//
 	//text = _wrapTextToFit
 	
@@ -200,7 +201,7 @@ function(x, y, width, height, text, wrapType, style)
 }
 
 kCanvas.prototype._wrapTextToFit = 
-function(text, width, text, wrapType, style)
+function(text, width, text, style)
 {
 	// If no wrapping is to be 
 	
