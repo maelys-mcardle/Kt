@@ -26,7 +26,7 @@ function(style)
 	this.context.strokeStyle = style.lineColour;
 	this.context.lineWidth   = style.lineWidth;
 	this.context.fillStyle   = style.fillColour;
-	this.context.font        = style.font;
+	this.context.font        = style.fontHeight + "px " + style.font;
 }	
 
 // =====================================================================
@@ -66,6 +66,15 @@ function(x, y, width, height, radius, style)
 	// Draw the rounded rectangle.
 	if (style.fillColour) this.context.fill();
 	if (style.lineColour) this.context.stroke();
+}
+
+kCanvas.prototype.drawEllipse = 
+function(x, y, width, height, style)
+{
+	// Load the style into the context.
+	this.loadStyle(style);
+	
+
 }
 
 kCanvas.prototype.drawLine = 
@@ -159,7 +168,7 @@ function(x, y, text, style)
 }
 
 kCanvas.prototype.drawBoundedText = 
-function(x, y, width, height, text, style)
+function(x, y, width, height, text, wrapType, style)
 {
 	// Load the style.
 	this.loadStyle(style);
@@ -169,10 +178,30 @@ function(x, y, width, height, text, style)
 	this.context.textBaseline = "top";
 	
 	// Measure the text.
-	var textWidth = this.context.measureText(text);
+	//var textWidth = this.context.measureText(text);
 	
+	var remainingText = text;
+	
+	// Go line by line.
+	textSize = this.context.measureText(text);
+	remainingText = textSize.width;
+	
+	// If the text is too big to fit, use quicksort to figure out the
+	// correct size.
+	
+	//
+	//text = _wrapTextToFit
 	
 		
 	// Display the text.
 	this.context.fillText(text, x, y);
+	
+	// Return the amount of displayed text.
+}
+
+kCanvas.prototype._wrapTextToFit = 
+function(text, width, text, wrapType, style)
+{
+	// If no wrapping is to be 
+	
 }

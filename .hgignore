@@ -6,6 +6,7 @@ syntax: glob
 *.pro.user
 *.o
 *moc_*
+*.kate-swp
 korgi-build-desktop/*
 Makefile
 korgi
