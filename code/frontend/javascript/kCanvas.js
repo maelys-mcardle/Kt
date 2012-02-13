@@ -23,10 +23,16 @@ function()
 kCanvas.prototype.loadStyle = 
 function(style)
 {
+	// Load in parameters defined by the style.
 	this.context.strokeStyle = style.lineColour;
 	this.context.lineWidth   = style.lineWidth;
 	this.context.fillStyle   = style.fillColour;
 	this.context.font        = style.textHeight + "px " + style.textFont;
+	
+	// Constants. The textBaseline means that the coordinates given
+	// to define text location will always correspond to the top bound,
+	// like all the other elements in here.
+	this.context.textBaseline = "top";
 }	
 
 // =====================================================================
@@ -159,10 +165,6 @@ function(x, y, text, style)
 	// Load the style.
 	this.loadStyle(style);
 	
-	// Define the Y coordinate as refering to the top of the element,
-	// like the other primitives.
-	this.context.textBaseline = "top";
-	
 	// Display the text.
 	this.context.fillText(text, x, y);
 }
@@ -173,36 +175,53 @@ function(x, y, width, height, text, style)
 	// Load the style.
 	this.loadStyle(style);
 	
-	// Define the Y coordinate as refering to the top of the element,
-	// like the other primitives.
-	this.context.textBaseline = "top";
-	
-	// Measure the text.
-	//var textWidth = this.context.measureText(text);
-	
+	// Initialize the variables.
 	var remainingText = text;
-	
-	// Go line by line.
-	textSize = this.context.measureText(text);
-	remainingText = textSize.width;
-	
-	// If the text is too big to fit, use quicksort to figure out the
-	// correct size.
-	
-	
-	//
-	//text = _wrapTextToFit
-	
+	var yPosition = y;
+	var xPosition = x;
+
+	// Go line by line, until we run out of text or no more text fits.
+	while (yPosition + style.textHeight < y + height && 
+		remainingText.length > 0) {
 		
-	// Display the text.
-	this.context.fillText(text, x, y);
+		// Get the characters to display.
+		var line = this.fitTextToWidth(remainingText, width, style);
+		remainingText = remainingText.slice(line.length);
+	
+		// Calculate the x position.
+		var lineSize = this.context.measureText(line).width;
+	
+		// Align right or center. Default is align to the left.
+		if (style.textAlign == kAlign.right)
+			xPosition = x + width - lineSize;
+		if (style.textAlign == kAlign.center)
+			xPosition = x + (width - lineSize) / 2;
+	
+		// Place the characters.
+		this.context.fillText(line, xPosition, yPosition);
+		
+		// Going to next line.
+		yPosition += style.textHeight * style.textLineSpacing;
+	}
 	
 	// Return the amount of displayed text.
+	return text.length - remainingText.length;
 }
 
-kCanvas.prototype._wrapTextToFit = 
-function(text, width, text, style)
+kCanvas.prototype.fitTextToWidth = 
+function(text, width, style)
 {
-	// If no wrapping is to be 
+	// Load the style.
+	this.loadStyle(style);
 	
+	// Get the size of the text.
+	var textSize = this.context.measureText(text).width;
+	
+	// Cut down the text until it fits.
+	while (textSize > width) {
+		
+	}
+	
+	// If no wrapping is to be 
+	return text;
 }

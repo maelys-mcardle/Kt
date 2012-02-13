@@ -18,8 +18,8 @@ var kStyle =
 		lineWidth: 3,
 		textFont: "Vegur",
 		textHeight: 50,
-		textLineSpacing: 5,
-		textAlignment: kAlign.left,
+		textLineSpacing: 1.2,
+		textAlign: kAlign.left,
 		textWrap: kWrap.wrapOnCharacters
 	}
 };
