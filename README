@@ -1,0 +1,10 @@
+Korgi
+
+A visual programming IDE built with Qt/C++ (backend) and 
+HTML5/Javascript (frontend).
+
+To compile, run:
+	qmake
+
+Followed by:
+	make
