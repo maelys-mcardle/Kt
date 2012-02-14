@@ -2,10 +2,10 @@
 // BASE FUNCTION
 // =====================================================================
 
-function kCanvas()
+function kCanvas(canvasElementId)
 {
 	// Load in the canvas from the HTML5 DOM.
-	this.canvas  = document.getElementById("surface");
+	this.canvas  = document.getElementById(canvasElementId);
 	this.context = this.canvas.getContext("2d");
 }
 
@@ -14,10 +14,10 @@ function kCanvas()
 // =====================================================================
 
 kCanvas.prototype.updateGeometry = 
-function()
+function(width, height)
 {
-	this.width  = this.canvas.width  = window.innerWidth;
-	this.height = this.canvas.height = window.innerHeight;
+	this.width  = this.canvas.width  = width;
+	this.height = this.canvas.height = height;
 }
 
 kCanvas.prototype.loadStyle = 
@@ -230,12 +230,10 @@ function(text, width, style)
 	// Load the style.
 	this.loadStyle(style);
 	
-	// Get the size of the text.
+	// Initialize variables.
 	var phrase = "";
 	var nextPiece = "";
 	var firstWord = true;
-	var whitespace = false;
-	var lastCharWasWhitespace;
 	
 	// Cut down the text until it fits.
 	for (var position = 0; position < text.length; position++) {
