@@ -20,6 +20,6 @@ var kStyle =
 		textHeight: 50,
 		textLineSpacing: 1.2,
 		textAlign: kAlign.center,
-		textWrap: kWrap.wrapOnWhitespace
+		textWrap: kWrap.wrapOnWords
 	}
 };

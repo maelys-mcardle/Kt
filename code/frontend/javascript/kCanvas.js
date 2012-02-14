@@ -215,6 +215,18 @@ function(x, y, width, height, text, style)
 kCanvas.prototype.fitTextToWidth = 
 function(text, width, style)
 {
+	// Wrap on Characters:
+	//  The line contains as many characters as can be fit within the
+	//  width specified. A newline character is part of the output, and
+	//  becomes its last character.
+	//
+	// Wrap on Words:
+	//  The line contains as many words as can be fit within the width
+	//  specified. There is an exception for the first word, whereby if
+	//  its width exceeds the width allocated, it is wrapped by
+	//  characters instead. The width of a word includes a single 
+	//  whitespace character that follows it.
+	
 	// Load the style.
 	this.loadStyle(style);
 	
@@ -222,17 +234,25 @@ function(text, width, style)
 	var phrase = "";
 	var nextPiece = "";
 	var firstWord = true;
+	var whitespace = false;
+	var lastCharWasWhitespace;
 	
 	// Cut down the text until it fits.
 	for (var position = 0; position < text.length; position++) {
 		
-		// Grab the next piece (wrap-style: character).
-		nextPiece += text.charAt(position);
+		// Grab the next character.
+		var character = text.charAt(position);
+		nextPiece += character;
+		
+		// Detect whitespace.
+		var whitespace = (character == " " || character == "\t");
+		if (whitespace) firstWord = false;
 		
 		// Grab more for the next piece (wrap-style: word).
-		if (style.textWrap == kWrap.wrapOnWhitespace &&
-			text.charAt(position) != " " && 
-			text.charAt(position) != "\t")
+		// Exception: the first word is longer than the width of the
+		// entire allocated space.
+		if (style.textWrap == kWrap.wrapOnWords && !whitespace && 
+			!firstWord)
 			continue;
 		
 		// If the width of the phrase with this new addition exceeds
@@ -245,7 +265,7 @@ function(text, width, style)
 		nextPiece = "";
 		
 		// Newline. We're done.
-		if (text.charAt(position) == "\n") break;
+		if (character == "\n") break;
 	}
 	
 	// Deal with any text remaining in the buffer.
