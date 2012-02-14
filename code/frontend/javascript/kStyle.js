@@ -19,7 +19,7 @@ var kStyle =
 		textFont: "Vegur",
 		textHeight: 50,
 		textLineSpacing: 1.2,
-		textAlign: kAlign.left,
-		textWrap: kWrap.wrapOnCharacters
+		textAlign: kAlign.center,
+		textWrap: kWrap.wrapOnWhitespace
 	}
 };

@@ -169,6 +169,10 @@ function(x, y, text, style)
 	this.context.fillText(text, x, y);
 }
 
+// =====================================================================
+// DRAW TEXT WITH CONSTRAINTS
+// =====================================================================
+
 kCanvas.prototype.drawBoundedText = 
 function(x, y, width, height, text, style)
 {
@@ -176,7 +180,7 @@ function(x, y, width, height, text, style)
 	this.loadStyle(style);
 	
 	// Initialize the variables.
-	var remainingText = text;
+	var remainingText = text.slice(0);
 	var yPosition = y;
 	var xPosition = x;
 
@@ -215,13 +219,35 @@ function(text, width, style)
 	this.loadStyle(style);
 	
 	// Get the size of the text.
-	var textSize = this.context.measureText(text).width;
+	var phrase = "";
+	var nextPiece = "";
+	var firstWord = true;
 	
 	// Cut down the text until it fits.
-	while (textSize > width) {
+	for (var position = 0; position < text.length; position++) {
 		
+		// Grab the next piece (wrap-style: character).
+		nextPiece += text.charAt(position);
+		
+		// Newline. We're done.
+		if (text.charAt(position) == "\n") break;
+		
+		// Grab more for the next piece (wrap-style: word).
+		if (style.textWrap == kWrap.wrapOnWhitespace &&
+			text.charAt(position) != " " && 
+			text.charAt(position) != "\t")
+			continue;
+		
+		// If the width of the phrase with this new addition exceeds
+		// the allocated width for it, we're done.
+		if (this.context.measureText(phrase + nextPiece).width > width)
+			break;
+		
+		// Otherwise, append the next piece to the phrase.
+		phrase += nextPiece;
+		nextPiece = "";
 	}
 	
-	// If no wrapping is to be 
-	return text;
+	// Return the wrapped phrase.
+	return phrase;
 }
