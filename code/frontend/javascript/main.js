@@ -12,5 +12,6 @@ function main()
 	canvas.drawText(400,10,"Heeeey!", kStyle.text);
 	canvas.drawRectangle(400,200,500,200,kStyle.rectangle);
 	canvas.drawBoundedText(400, 200, 500, 200, "So what if the mooooooooooooooooooooooooooooooo cat said that this is not cool and that cat kool.", kStyle.text);
+	canvas.drawEllipse(600,100,200,200,kStyle.rectangle);
 	setTimeout(main, 100);
 }

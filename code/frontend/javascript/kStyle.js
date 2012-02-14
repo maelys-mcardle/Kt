@@ -13,10 +13,12 @@ var kStyle =
 	},
 	
 	text: {
-		fillColour: "white",
-		lineColour: "white",
+		fillColour: "",
+		lineColour: "",
 		lineWidth: 3,
+		
 		textFont: "Vegur",
+		textColour: "white",
 		textHeight: 50,
 		textLineSpacing: 1.2,
 		textAlign: kAlign.center,

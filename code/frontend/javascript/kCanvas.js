@@ -62,7 +62,8 @@ function(x, y, width, height, radius, style)
 	this.context.lineTo(x + width - radius, y);
 	this.context.quadraticCurveTo(x + width, y, x + width, y + radius);
 	this.context.lineTo(x + width, y + height - radius);
-	this.context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+	this.context.quadraticCurveTo(x + width, y + height, 
+		x + width - radius, y + height);
 	this.context.lineTo(x + radius, y + height);
 	this.context.quadraticCurveTo(x, y + height, x, y + height - radius);
 	this.context.lineTo(x, y + radius);
@@ -80,7 +81,18 @@ function(x, y, width, height, style)
 	// Load the style into the context.
 	this.loadStyle(style);
 	
-
+	// Path out the ellipse.
+	this.context.beginPath();
+	this.context.moveTo(x, y + height / 2);
+	this.context.bezierCurveTo(x, y, x + width, y, 
+		x + width, y + height / 2);
+	this.context.bezierCurveTo(x + width, y + height, x, y + height, 
+		x, y + height / 2);
+	this.context.closePath();
+	
+	// Draw the ellipse.
+	if (style.fillColour) this.context.fill();
+	if (style.lineColour) this.context.stroke();
 }
 
 kCanvas.prototype.drawLine = 
@@ -166,6 +178,7 @@ function(x, y, text, style)
 	this.loadStyle(style);
 	
 	// Display the text.
+	this.context.fillStyle = style.textColour;
 	this.context.fillText(text, x, y);
 }
 
@@ -202,7 +215,7 @@ function(x, y, width, height, text, style)
 			xPosition = x + (width - lineSize) / 2;
 	
 		// Place the characters.
-		this.context.fillText(line, xPosition, yPosition);
+		this.drawText(xPosition, yPosition, line, style);
 		
 		// Going to next line.
 		yPosition += style.textHeight * style.textLineSpacing;
