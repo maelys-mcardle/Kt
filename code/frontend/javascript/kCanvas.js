@@ -229,9 +229,6 @@ function(text, width, style)
 		// Grab the next piece (wrap-style: character).
 		nextPiece += text.charAt(position);
 		
-		// Newline. We're done.
-		if (text.charAt(position) == "\n") break;
-		
 		// Grab more for the next piece (wrap-style: word).
 		if (style.textWrap == kWrap.wrapOnWhitespace &&
 			text.charAt(position) != " " && 
@@ -246,7 +243,14 @@ function(text, width, style)
 		// Otherwise, append the next piece to the phrase.
 		phrase += nextPiece;
 		nextPiece = "";
+		
+		// Newline. We're done.
+		if (text.charAt(position) == "\n") break;
 	}
+	
+	// Deal with any text remaining in the buffer.
+	if (this.context.measureText(phrase + nextPiece).width < width)
+		phrase += nextPiece;
 	
 	// Return the wrapped phrase.
 	return phrase;

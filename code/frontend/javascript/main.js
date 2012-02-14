@@ -11,6 +11,6 @@ function main()
 	canvas.drawPolygon(300, 100, [[0,10],[20,30],[100,50]], kStyle.rectangle);
 	canvas.drawText(400,10,"Heeeey!", kStyle.text);
 	canvas.drawRectangle(400,200,500,200,kStyle.rectangle);
-	canvas.drawBoundedText(400, 200, 500, 200, "Hello there! My name is Johnny and I think you're kewl.", kStyle.text);
+	canvas.drawBoundedText(400, 200, 500, 200, "Hello there! My name\n is Johnny and I think you're the cat kool.", kStyle.text);
 	setTimeout(main, 100);
 }
