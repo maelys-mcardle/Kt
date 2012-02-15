@@ -193,19 +193,21 @@ function(x, y, width, height, text, style)
 	this.loadStyle(style);
 	
 	// Initialize the variables.
-	var remainingText = text.slice(0);
+	var remainingText = text.substring(0);
 	var textGeometry = new Array();
 	var yPosition = y;
 	var xPosition = x;
+	var line = "";
 
 	// Go line by line, until we run out of text or no more text fits.
 	while (yPosition + style.textHeight < y + height && 
 		remainingText.length > 0) {
 		
 		// Get the characters to display.
-		var line = this.wrapTextToWidth(remainingText, width, style);
-		remainingText = remainingText.slice(line.length);
-	
+		wrapReturn = this.wrapTextToWidth(remainingText, width, style);
+		line          = wrapReturn.phrase;
+		remainingText = wrapReturn.remainingText;
+		
 		// Calculate the x position.
 		var lineSize = this.context.measureText(line).width;
 	
@@ -228,7 +230,7 @@ function(x, y, width, height, text, style)
 	
 	// Return the amount of displayed text and its positions.
 	return {
-		characters: text.length - remainingText.length, 
+		visibleCharacters: text.length - remainingText.length, 
 		geometry: textGeometry
 	};
 }
@@ -251,6 +253,10 @@ function(text, width, style)
 	//  its width exceeds the width allocated, it is wrapped by
 	//  characters instead. The width of a word includes a single 
 	//  whitespace character that follows it.
+	//
+	// No Wrap:
+	//  Same as wrap on characters, but the next line starts with the
+	//  first character after a newline.
 	
 	// Load the style.
 	this.loadStyle(style);
@@ -259,6 +265,7 @@ function(text, width, style)
 	var phrase = "";
 	var nextPiece = "";
 	var firstWord = true;
+	var remainingText;
 	
 	// Cut down the text until it fits.
 	for (var position = 0; position < text.length; position++) {
@@ -295,8 +302,30 @@ function(text, width, style)
 	if (this.context.measureText(phrase + nextPiece).width < width)
 		phrase += nextPiece;
 	
+	// No wrapping: the remaining text starts after the first newline.
+	if (style.textWrap == kWrap.noWrap) {
+		
+		// Get the position of the first newline.
+		var newlinePosition = text.indexOf("\n");
+		
+		// No newline found. All text exhausted.
+		if (newlinePosition < 0)
+			remainingText = "";
+		
+		// Newline found outside our wrapped line. Return what follows.
+		if (newlinePosition >= phrase.length)
+			remainingText = text.substring(newlinePosition + 1);
+	}
+	
+	// Wrap on character or newline: the remaining text starts after the
+	// current content.
+	else remainingText = text.substring(phrase.length);
+	
 	// Return the wrapped phrase.
-	return phrase;
+	return {
+		phrase: phrase,
+		remainingText: remainingText
+	};
 }
 
 kCanvas.prototype.getTextGeometry = 

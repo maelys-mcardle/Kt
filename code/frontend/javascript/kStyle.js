@@ -22,6 +22,6 @@ var kStyle =
 		textHeight: 50,
 		textLineSpacing: 1.2,
 		textAlign: kAlign.center,
-		textWrap: kWrap.wrapOnWords
+		textWrap: kWrap.noWrap
 	}
 };
