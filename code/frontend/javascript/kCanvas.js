@@ -249,7 +249,15 @@ function(x, y, width, height, filepath, style)
 			image.width < width ? image.width : width,
 			image.height < height ? image.height : height);
 		
-	// Draw the image
+	// Draw the image in stretch mode. Its contents are resized to
+	// maximize real estate within the boundaries specified, whilst
+	// keeping the aspect ratio.
+	else if (style.imageExpand == kImage.stretchToFit)
+		this.context.drawImage(image, x, y,
+			(width / height) < (image.width / image.height) ? 
+				width : (height / image.height) * image.width, 
+			(width / height) < (image.width / image.height) ? 
+				(width / image.width) * image.height : height);
 	
 }
 

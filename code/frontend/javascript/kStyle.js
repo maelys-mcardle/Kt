@@ -36,7 +36,7 @@ var kStyle =
 	},
 	
 	image: {
-		imageExpand: kImage.native,
+		imageExpand: kImage.stretchToFit,
 		imageScale: 1.5,
 		imageRotation: 0
 	},
