@@ -226,24 +226,48 @@ function(x, y, filepath, style)
 kCanvas.prototype.drawBoundedImage = 
 function(x, y, width, height, filepath, style)
 {
+	// Load the style data.
+	this.loadStyle(style);
+	
 	// Load the image in.
 	var image = new Image();
 	image.src = filepath;
 	
-	// Draw the image.
-	mainContext.drawImage(image, startX, startY);
-}
+	// Draw the image in fill mode. The image fills the given width and
+	// height. Aspect ratio is not preserved.
+	if (style.imageExpand == kImage.fill) {
+		this.context.drawImage(image, x, y, width, height);
+		return;
+	}
+	
+	// Gather a few metrics about the image.
+	var imageWidthGreater   = image.width > width;
+	var imageHeightGreater  = image.height > height;
+	var destinationTooSmall = imageWidthGreater || imageHeightGreater;
+	var imageAspectRatio    = image.width / image.height;
+	var destinationAspectRatio = width / height;
 
-// =====================================================================
-// APPLY SCALING & ROTATION
-// =====================================================================
-
-kCanvas.prototype.scaleAndRotate = 
-function(x, y, width, height, style)
-{
-	// Call functions to alter properties defined by the style.
-	this.context.rotate(style.rotation);
-	this.context.scale(style.scale, style.scale);	
+	// Draw the image in native mode. If the width and height are
+	// smaller than the image dimensions, clip the image. If they're
+	// bigger, keep the image at its original size.
+	if (style.imageExpand == kImage.native) {
+		
+		// If the destination can accomodate the full image, draw it.
+		if (!destinationTooSmall)
+			this.context.drawImage(image, 0, 0, image.width, 
+				image.height, x, y, image.width, image.height);
+			
+		// Otherwise crop the image to fit the destination.
+		else {
+		var destinationWidth = image.width < width ? image.width : width; 	
+		var sourceWidth = image.width < width ? image.width :
+		
+		this.context.drawImage(image, 0, 0, 10, 10, x, y,  destinationWidth, height);	
+			
+		}
+			
+	}
+	
 }
 
 // =====================================================================
