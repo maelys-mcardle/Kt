@@ -235,38 +235,21 @@ function(x, y, width, height, filepath, style)
 	
 	// Draw the image in fill mode. The image fills the given width and
 	// height. Aspect ratio is not preserved.
-	if (style.imageExpand == kImage.fill) {
+	if (style.imageExpand == kImage.fill)
 		this.context.drawImage(image, x, y, width, height);
-		return;
-	}
 	
-	// Gather a few metrics about the image.
-	var imageWidthGreater   = image.width > width;
-	var imageHeightGreater  = image.height > height;
-	var destinationTooSmall = imageWidthGreater || imageHeightGreater;
-	var imageAspectRatio    = image.width / image.height;
-	var destinationAspectRatio = width / height;
-
 	// Draw the image in native mode. If the width and height are
 	// smaller than the image dimensions, clip the image. If they're
 	// bigger, keep the image at its original size.
-	if (style.imageExpand == kImage.native) {
+	else if (style.imageExpand == kImage.native) 
+		this.context.drawImage(image, 0, 0,
+			image.width < width ? image.width : width,
+			image.height < height ? image.height : height,
+			x, y,
+			image.width < width ? image.width : width,
+			image.height < height ? image.height : height);
 		
-		// If the destination can accomodate the full image, draw it.
-		if (!destinationTooSmall)
-			this.context.drawImage(image, 0, 0, image.width, 
-				image.height, x, y, image.width, image.height);
-			
-		// Otherwise crop the image to fit the destination.
-		else {
-		var destinationWidth = image.width < width ? image.width : width; 	
-		var sourceWidth = image.width < width ? image.width :
-		
-		this.context.drawImage(image, 0, 0, 10, 10, x, y,  destinationWidth, height);	
-			
-		}
-			
-	}
+	// Draw the image
 	
 }
 
