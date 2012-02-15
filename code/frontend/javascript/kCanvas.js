@@ -36,20 +36,37 @@ function()
 kCanvas.prototype.loadStyle = 
 function(style)
 {
+	// Load in defaults into uninitialized properties.
+	this.initializeStyle(style);
+	
 	// Load in properties defined by the style.
 	this.context.strokeStyle = style.lineColour;
 	this.context.lineWidth   = style.lineWidth;
 	this.context.fillStyle   = style.fillColour;
 	this.context.font        = style.textHeight + "px " + style.textFont;
 	
-	// Call functions to alter properties defined by the style.
-	this.context.rotate(style.rotation);
-	this.context.scale(style.scale, style.scale);
-	
 	// Constants. The textBaseline means that the coordinates given
 	// to define text location will always correspond to the top bound,
 	// like all the other elements in here.
 	this.context.textBaseline = "top";
+	this.context.rotate(0);
+	this.context.scale(1, 1);	
+}
+
+kCanvas.prototype.initializeStyle = 
+function(style)
+{
+	// List the properties of the default style.
+	var properties = Object.keys(kStyle.default);
+	
+	// For each property that we have, look at the style and see if
+	// it has such a property. If it doesn't, populate it with the
+	// default value.
+	while (properties.length > 0) {
+		var propertyName = properties.pop();
+		if (typeof style[propertyName] === "undefined")
+			style[propertyName] = kStyle.default[propertyName];
+	}
 }	
 
 // =====================================================================
@@ -189,28 +206,44 @@ function(style)
 // =====================================================================
 
 kCanvas.prototype.drawImage = 
-function(x, y, imagePath, style)
+function(x, y, filepath, style)
 {
 	// Load the style data.
 	this.loadStyle(style);
 	
 	// Load the image in.
 	var image = new Image();
-	image.src = imagePath;
+	image.src = filepath;
 	
 	// Draw the image.
 	this.context.drawImage(image, x, y);
 }
 
+// =====================================================================
+// DRAW IMAGE WITHIN GIVEN BOUNDARIES
+// =====================================================================
+
 kCanvas.prototype.drawBoundedImage = 
-function(x, y, width, height, image, style)
+function(x, y, width, height, filepath, style)
 {
 	// Load the image in.
 	var image = new Image();
-	image.src = imagePath;
+	image.src = filepath;
 	
 	// Draw the image.
 	mainContext.drawImage(image, startX, startY);
+}
+
+// =====================================================================
+// APPLY SCALING & ROTATION
+// =====================================================================
+
+kCanvas.prototype.scaleAndRotate = 
+function(x, y, width, height, style)
+{
+	// Call functions to alter properties defined by the style.
+	this.context.rotate(style.rotation);
+	this.context.scale(style.scale, style.scale);	
 }
 
 // =====================================================================
