@@ -183,7 +183,7 @@ function(x, y, text, style)
 }
 
 // =====================================================================
-// DRAW TEXT WITH CONSTRAINTS
+// DRAW TEXT WITHIN GIVEN BOUNDARIES
 // =====================================================================
 
 kCanvas.prototype.drawBoundedText = 
@@ -194,6 +194,7 @@ function(x, y, width, height, text, style)
 	
 	// Initialize the variables.
 	var remainingText = text.slice(0);
+	var textGeometry = new Array();
 	var yPosition = y;
 	var xPosition = x;
 
@@ -202,7 +203,7 @@ function(x, y, width, height, text, style)
 		remainingText.length > 0) {
 		
 		// Get the characters to display.
-		var line = this.fitTextToWidth(remainingText, width, style);
+		var line = this.wrapTextToWidth(remainingText, width, style);
 		remainingText = remainingText.slice(line.length);
 	
 		// Calculate the x position.
@@ -213,6 +214,10 @@ function(x, y, width, height, text, style)
 			xPosition = x + width - lineSize;
 		if (style.textAlign == kAlign.center)
 			xPosition = x + (width - lineSize) / 2;
+		
+		// Get the geometry of the characters.
+		textGeometry.push(this.getTextGeometry(xPosition, 
+			yPosition, line, style));
 	
 		// Place the characters.
 		this.drawText(xPosition, yPosition, line, style);
@@ -221,11 +226,18 @@ function(x, y, width, height, text, style)
 		yPosition += style.textHeight * style.textLineSpacing;
 	}
 	
-	// Return the amount of displayed text.
-	return text.length - remainingText.length;
+	// Return the amount of displayed text and its positions.
+	return {
+		characters: text.length - remainingText.length, 
+		geometry: textGeometry
+	};
 }
 
-kCanvas.prototype.fitTextToWidth = 
+// =====================================================================
+// TEXT HELPER FUNCTIONS
+// =====================================================================
+
+kCanvas.prototype.wrapTextToWidth = 
 function(text, width, style)
 {
 	// Wrap on Characters:
@@ -285,4 +297,37 @@ function(text, width, style)
 	
 	// Return the wrapped phrase.
 	return phrase;
+}
+
+kCanvas.prototype.getTextGeometry = 
+function(x, y, text, style)
+{
+	// Load the style.
+	this.loadStyle(style);
+	
+	// Setup variables.
+	var geometry = new Array();
+	var xPosition = x;
+	
+	// Go character by character.
+	for (var position = 0; position < text.length; position++) {
+		
+		// Get the character.
+		var char = text.charAt(position);
+		
+		// If the character is a newline, abort.
+		if (char == "\n") break;
+		
+		// Get the width of the character.
+		var width = this.context.measureText(char).width;
+		
+		// Put together the position/size properties of the character.
+		geometry.push([char, xPosition, y, width, style.textHeight]);
+		
+		// Keep track of our position.
+		xPosition += width;
+	}
+	
+	// Return the geometric properties of each character.
+	return geometry;
 }
