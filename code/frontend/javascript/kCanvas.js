@@ -10,24 +10,41 @@ function kCanvas(canvasElementId)
 }
 
 // =====================================================================
-// CANVAS & CONTEXT MANAGEMENT
+// CANVAS MANAGEMENT
 // =====================================================================
 
-kCanvas.prototype.updateGeometry = 
+kCanvas.prototype.setGeometry = 
 function(width, height)
 {
-	this.width  = this.canvas.width  = width;
-	this.height = this.canvas.height = height;
+	this.canvas.width  = width;
+	this.canvas.height = height;
 }
+
+kCanvas.prototype.getGeometry = 
+function()
+{
+	return {
+		width: this.canvas.height, 
+		height: this.canvas.height
+	};
+}
+
+// =====================================================================
+// LOAD STYLE OPTIONS INTO CONTEXT
+// =====================================================================
 
 kCanvas.prototype.loadStyle = 
 function(style)
 {
-	// Load in parameters defined by the style.
+	// Load in properties defined by the style.
 	this.context.strokeStyle = style.lineColour;
 	this.context.lineWidth   = style.lineWidth;
 	this.context.fillStyle   = style.fillColour;
 	this.context.font        = style.textHeight + "px " + style.textFont;
+	
+	// Call functions to alter properties defined by the style.
+	this.context.rotate(style.rotation);
+	this.context.scale(style.scale, style.scale);
 	
 	// Constants. The textBaseline means that the coordinates given
 	// to define text location will always correspond to the top bound,
@@ -165,6 +182,35 @@ function(style)
 	// A background is just a rectangle that fills the screen. 
 	this.drawRectangle(0, 0, this.canvas.width, 
 		this.canvas.height, style);
+}
+
+// =====================================================================
+// DRAW IMAGE
+// =====================================================================
+
+kCanvas.prototype.drawImage = 
+function(x, y, imagePath, style)
+{
+	// Load the style data.
+	this.loadStyle(style);
+	
+	// Load the image in.
+	var image = new Image();
+	image.src = imagePath;
+	
+	// Draw the image.
+	this.context.drawImage(image, x, y);
+}
+
+kCanvas.prototype.drawBoundedImage = 
+function(x, y, width, height, image, style)
+{
+	// Load the image in.
+	var image = new Image();
+	image.src = imagePath;
+	
+	// Draw the image.
+	mainContext.drawImage(image, startX, startY);
 }
 
 // =====================================================================

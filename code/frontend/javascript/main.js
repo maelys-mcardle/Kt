@@ -2,9 +2,9 @@
 function main() 
 {
 	canvas = new kCanvas("surface");
-	canvas.updateGeometry(window.innerWidth, window.innerHeight);
+	canvas.setGeometry(window.innerWidth, window.innerHeight);
 	canvas.drawBackground(kStyle.background);
-	canvas.drawRectangle(10, 10, 30, 30, kStyle.rectangle);
+	/*canvas.drawRectangle(10, 10, 30, 30, kStyle.rectangle);
 	canvas.drawRoundedRectangle(50, 50, 30, 30, 15, kStyle.rectangle);
 	canvas.drawLine(100, 100, 50, 50, kStyle.rectangle);
 	canvas.drawLines(200, 100, [[10,10],[15,5],[4,3]], kStyle.rectangle);
@@ -12,6 +12,7 @@ function main()
 	canvas.drawText(400,10,"Heeeey!", kStyle.text);
 	canvas.drawRectangle(400,200,500,200,kStyle.rectangle);
 	canvas.drawBoundedText(400, 200, 500, 200, "So whis is not cool and that cat kool.", kStyle.text);
-	canvas.drawEllipse(600,100,200,200,kStyle.rectangle);
+	canvas.drawEllipse(600,100,200,200,kStyle.rectangle);*/
+	canvas.drawImage(20, 20, "../../icon/korgi_128px.png", kStyle.image);
 	setTimeout(main, 100);
 }

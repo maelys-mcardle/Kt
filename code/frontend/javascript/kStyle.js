@@ -1,27 +1,31 @@
 var kStyle = 
 {
+	default: {
+		scale: 1,
+		rotation: 0
+	},
+	
 	background: {
-		fillColour: "#212121", 
-		lineColour: 0,
-		lineWidth: 0,
+		fillColour: "#212121"
 	},
 	
 	rectangle: {
 		fillColour: "red",
 		lineColour: "white",
-		lineWidth: 1,
+		lineWidth: 2
 	},
 	
 	text: {
-		fillColour: "",
-		lineColour: "",
-		lineWidth: 3,
-		
 		textFont: "Vegur",
 		textColour: "white",
 		textHeight: 50,
 		textLineSpacing: 1.2,
 		textAlign: kAlign.center,
 		textWrap: kWrap.noWrap
-	}
+	},
+	
+	image: {
+		scale: 1.5,
+		rotation: 0
+	},
 };
