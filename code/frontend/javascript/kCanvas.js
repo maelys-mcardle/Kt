@@ -44,11 +44,17 @@ function(style)
 	this.context.lineWidth   = style.lineWidth;
 	this.context.fillStyle   = style.fillColour;
 	this.context.font        = style.textHeight + "px " + style.textFont;
+	this.context.shadowColor = style.shadowColour;
+	this.context.shadowBlur  = style.shadowBlur;
+	this.context.shadowOffsetX = style.shadowOffsetX;
+	this.context.shadowOffsetY = style.shadowOffsetY;
 	
 	// Constants. The textBaseline means that the coordinates given
 	// to define text location will always correspond to the top bound,
 	// like all the other elements in here.
 	this.context.textBaseline = "top";
+	
+	// Reset the canvas scale and rotation factors.
 	this.context.rotate(0);
 	this.context.scale(1, 1);	
 }

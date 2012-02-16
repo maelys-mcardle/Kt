@@ -6,6 +6,11 @@ var kStyle =
 		lineColour: "black",
 		lineWidth: 1,
 		
+		shadowColour: "black",
+		shadowOffsetX: 0,
+		shadowOffsetY: 0,
+		shadowBlur: 0,
+		
 		textFont: "Vegur",
 		textColour: "white",
 		textHeight: 50,
@@ -21,7 +26,11 @@ var kStyle =
 	},
 	
 	rectangle: {
-		lineWidth: 2
+		lineWidth: 2,
+		shadowColour: "white",
+		shadowBlur: 5,
+		shadowOffsetX: 2,
+		shadowOffsetY: 2
 	},
 	
 	text: {
