@@ -235,13 +235,13 @@ function(x, y, width, height, filepath, style)
 	
 	// Draw the image in fill mode. The image fills the given width and
 	// height. Aspect ratio is not preserved.
-	if (style.imageExpand == kImage.fill)
+	if (style.imagePolicy == kImage.fill)
 		this.context.drawImage(image, x, y, width, height);
 	
 	// Draw the image in native mode. If the width and height are
 	// smaller than the image dimensions, clip the image. If they're
 	// bigger, keep the image at its original size.
-	else if (style.imageExpand == kImage.native) 
+	else if (style.imagePolicy == kImage.native) 
 		this.context.drawImage(image, 0, 0,
 			image.width < width ? image.width : width,
 			image.height < height ? image.height : height,
@@ -252,13 +252,32 @@ function(x, y, width, height, filepath, style)
 	// Draw the image in stretch mode. Its contents are resized to
 	// maximize real estate within the boundaries specified, whilst
 	// keeping the aspect ratio.
-	else if (style.imageExpand == kImage.stretchToFit)
+	else if (style.imagePolicy == kImage.stretch)
 		this.context.drawImage(image, x, y,
 			(width / height) < (image.width / image.height) ? 
 				width : (height / image.height) * image.width, 
 			(width / height) < (image.width / image.height) ? 
 				(width / image.width) * image.height : height);
-	
+		
+	// Draw the image in tile mode. Its contents are repeated
+	// vertically and horizontally within the bounds specified.
+	else if (style.imagePolicy == kImage.tile) {
+		for (var yOff = 0; yOff < height; yOff += image.height) {
+			for (var xOff = 0; xOff < width; xOff += image.width) {
+				this.context.drawImage(image, 0, 0,
+					image.width < width - xOff ? 
+						image.width : width - xOff,
+					image.height < height - yOff ? 
+						image.height : height - yOff,
+					xOff + x, yOff + y,
+					image.width < width - xOff ? 
+						image.width : width - xOff,
+					image.height < height - yOff ? 
+						image.height : height - yOff);
+			}
+		}
+		
+	}	
 }
 
 // =====================================================================
