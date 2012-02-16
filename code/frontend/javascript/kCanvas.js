@@ -5,11 +5,15 @@
 function kCanvas(canvasElementId)
 {
 	// Load in the canvas from the HTML5 DOM.
-	this.canvas  = document.getElementById(canvasElementId);
+	this.canvas        = document.getElementById(canvasElementId);
 	
 	// Create the frame buffer and the context to access it.
 	this.buffer  = document.createElement("canvas");
 	this.context = this.buffer.getContext("2d");
+	
+	// Set the initial properties of the frame buffer.
+	this.buffer.width  = this.canvas.width;
+	this.buffer.height = this.canvas.height;
 }
 
 // =====================================================================
@@ -32,12 +36,21 @@ function()
 	};
 }
 
+kCanvas.prototype.clear = 
+function()
+{
+	// Clear the contents of the screen, and push a render.
+	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	this.render();
+}
+
 kCanvas.prototype.render =
 function()
 {
 	// Copy the contents of the frame buffer into the visible canvas.
 	this.canvas.getContext("2d").drawImage(this.buffer, 0, 0);
 }
+
 // =====================================================================
 // LOAD STYLE OPTIONS INTO CONTEXT
 // =====================================================================
@@ -82,7 +95,7 @@ function(style)
 		if (typeof style[propertyName] === "undefined")
 			style[propertyName] = kStyle.default[propertyName];
 	}
-}	
+}
 
 // =====================================================================
 // DRAW BASIC PRIMITIVES
