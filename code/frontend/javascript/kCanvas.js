@@ -6,7 +6,10 @@ function kCanvas(canvasElementId)
 {
 	// Load in the canvas from the HTML5 DOM.
 	this.canvas  = document.getElementById(canvasElementId);
-	this.context = this.canvas.getContext("2d");
+	
+	// Create the frame buffer and the context to access it.
+	this.buffer  = document.createElement("canvas");
+	this.context = this.buffer.getContext("2d");
 }
 
 // =====================================================================
@@ -16,19 +19,25 @@ function kCanvas(canvasElementId)
 kCanvas.prototype.setGeometry = 
 function(width, height)
 {
-	this.canvas.width  = width;
-	this.canvas.height = height;
+	this.canvas.width  = this.buffer.width  = width;
+	this.canvas.height = this.buffer.height = height;
 }
 
 kCanvas.prototype.getGeometry = 
 function()
 {
 	return {
-		width: this.canvas.height, 
+		width:  this.canvas.height, 
 		height: this.canvas.height
 	};
 }
 
+kCanvas.prototype.render =
+function()
+{
+	// Copy the contents of the frame buffer into the visible canvas.
+	this.canvas.getContext("2d").drawImage(this.buffer, 0, 0);
+}
 // =====================================================================
 // LOAD STYLE OPTIONS INTO CONTEXT
 // =====================================================================
@@ -284,9 +293,9 @@ function(x, y, width, height, filepath, style)
 		}
 	}
 	
-	// Draw the image in tile mode. Its contents are repeated in both
-	// axes, but unlike the regular tile mode, may not be aligned with
-	// the x & y coordinates. 
+	// Draw the image in fast tile mode. Its contents are repeated in
+	// both axes, but unlike the regular tile mode, may not be aligned
+	// with the x & y coordinates. 
 	else if (style.imagePolicy == kImage.fastTile) {
 		pattern = this.context.createPattern(image, "repeat");
 		this.context.fillStyle = pattern;

@@ -15,5 +15,6 @@ function main()
 	canvas.drawEllipse(600,100,200,200,kStyle.rectangle);
 	canvas.drawImage(20, 20, "../../icon/korgi_128px.png", kStyle.image);*/
 	canvas.drawBoundedImage(20, 20, 384, 400, "../../icon/korgi_128px.png", kStyle.image);
+	canvas.render();
 	setTimeout(main, 100);
 }
