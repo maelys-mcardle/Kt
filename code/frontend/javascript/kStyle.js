@@ -18,7 +18,9 @@ var kStyle =
 		textAlign: kAlign.left,
 		textWrap: kWrap.wrapOnWords,
 		
-		imagePolicy: kImage.stretch
+		imagePolicy: kImage.stretch,
+		
+		gradientOrientation: kGradient.horizontal
 	},
 	
 	background: {

@@ -94,6 +94,29 @@ function(style)
 }
 
 // =====================================================================
+// INSERT A GRADIENT INTO A STYLE
+// =====================================================================
+
+kCanvas.prototype.setStyleGradient = 
+function(x, y, width, height, startColour, endColour, style, property)
+{
+	// Load the style into the context.
+	this.loadStyle(style);
+	
+	// Create the gradient.
+	var gradient = (style.gradientOrientation == kGradient.horizontal) ?
+		this.context.createLinearGradient(x, y, x + width, y):
+		this.context.createLinearGradient(x, y, x, y + height);
+	
+	// Add the stops and return the gradient.
+	gradient.addColorStop(0, startColour);
+	gradient.addColorStop(1, endColour);
+	
+	// Update the object property with the gradient.
+	style[property] = gradient;
+}
+
+// =====================================================================
 // DRAW BASIC PRIMITIVES
 // =====================================================================
 
