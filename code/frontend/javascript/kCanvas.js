@@ -267,7 +267,7 @@ function(x, y, width, height, filepath, style)
 		
 	// Draw the image in tile mode. Its contents are repeated
 	// vertically and horizontally within the bounds specified.
-	else if (style.imagePolicy == kImage.tile) {
+	else if (style.imagePolicy == kImage.tile) {		
 		for (var yOff = 0; yOff < height; yOff += image.height) {
 			for (var xOff = 0; xOff < width; xOff += image.width) {
 				this.context.drawImage(image, 0, 0,
@@ -282,7 +282,15 @@ function(x, y, width, height, filepath, style)
 						image.height : height - yOff);
 			}
 		}
-		
+	}
+	
+	// Draw the image in tile mode. Its contents are repeated in both
+	// axes, but unlike the regular tile mode, may not be aligned with
+	// the x & y coordinates. 
+	else if (style.imagePolicy == kImage.fastTile) {
+		pattern = this.context.createPattern(image, "repeat");
+		this.context.fillStyle = pattern;
+		this.context.fillRect(x, y, width, height);
 	}	
 }
 

@@ -13,8 +13,7 @@ function main()
 	canvas.drawRectangle(400,200,500,200,kStyle.rectangle);
 	canvas.drawBoundedText(400, 200, 500, 200, "So whis is not cool and that cat kool.", kStyle.text);
 	canvas.drawEllipse(600,100,200,200,kStyle.rectangle);
-	canvas.drawImage(20, 20, "../../icon/korgi_128px.png", kStyle.image);
-	canvas.drawBoundedImage(20, 20, 384, 400, "../../icon/korgi_128px.png", kStyle.image);*/
-	canvas.drawRectangle(10,10,200,200, kStyle.rectangle);
+	canvas.drawImage(20, 20, "../../icon/korgi_128px.png", kStyle.image);*/
+	canvas.drawBoundedImage(20, 20, 384, 400, "../../icon/korgi_128px.png", kStyle.image);
 	setTimeout(main, 100);
 }
