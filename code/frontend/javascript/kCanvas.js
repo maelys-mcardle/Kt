@@ -5,7 +5,7 @@
 function kCanvas(canvasElementId)
 {
 	// Load in the canvas from the HTML5 DOM.
-	this.canvas        = document.getElementById(canvasElementId);
+	this.canvas = document.getElementById(canvasElementId);
 	
 	// Create the frame buffer and the context to access it.
 	this.buffer  = document.createElement("canvas");
@@ -75,10 +75,6 @@ function(style)
 	// to define text location will always correspond to the top bound,
 	// like all the other elements in here.
 	this.context.textBaseline = "top";
-	
-	// Reset the canvas scale and rotation factors.
-	this.context.rotate(0);
-	this.context.scale(1, 1);	
 }
 
 kCanvas.prototype.initializeStyle = 
@@ -289,30 +285,21 @@ function(x, y, width, height, filepath, style)
 		
 	// Draw the image in tile mode. Its contents are repeated
 	// vertically and horizontally within the bounds specified.
-	else if (style.imagePolicy == kImage.tile) {		
-		for (var yOff = 0; yOff < height; yOff += image.height) {
-			for (var xOff = 0; xOff < width; xOff += image.width) {
-				this.context.drawImage(image, 0, 0,
-					image.width < width - xOff ? 
-						image.width : width - xOff,
-					image.height < height - yOff ? 
-						image.height : height - yOff,
-					xOff + x, yOff + y,
-					image.width < width - xOff ? 
-						image.width : width - xOff,
-					image.height < height - yOff ? 
-						image.height : height - yOff);
-			}
-		}
-	}
-	
-	// Draw the image in fast tile mode. Its contents are repeated in
-	// both axes, but unlike the regular tile mode, may not be aligned
-	// with the x & y coordinates. 
-	else if (style.imagePolicy == kImage.fastTile) {
+	else if (style.imagePolicy == kImage.tile) {
+		
+		// Generate the pattern - the tiled images.
 		pattern = this.context.createPattern(image, "repeat");
+		
+		// We use translation functions so that the pattern aligns
+		// with the start coordinates.
+		this.context.translate(x, y);
+		
+		// Draw the image.
 		this.context.fillStyle = pattern;
-		this.context.fillRect(x, y, width, height);
+		this.context.fillRect(0, 0, width, height);
+		
+		// Restore the translation back.
+		this.context.translate(-x, -y);
 	}	
 }
 

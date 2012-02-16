@@ -18,7 +18,7 @@ var kStyle =
 		textAlign: kAlign.left,
 		textWrap: kWrap.wrapOnWords,
 		
-		imagePolicy: kImage.stretch,
+		imagePolicy: kImage.stretch
 	},
 	
 	background: {
@@ -43,6 +43,6 @@ var kStyle =
 	},
 	
 	image: {
-		imagePolicy: kImage.tile,
+		imagePolicy: kImage.tile
 	},
 };
