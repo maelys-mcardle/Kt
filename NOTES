@@ -1,6 +1,7 @@
 These are notes that I keep during the development process of korgi...
 ------------------------------------------------------------------------
 
+	canvas = new kCanvas(canvasId);
 	canvas.setGeometry(window.innerWidth, window.innerHeight);
 	canvas.clear();
 	canvas.drawBackground(kStyle.background);
