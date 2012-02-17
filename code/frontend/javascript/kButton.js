@@ -19,7 +19,11 @@ function kButton(x, y, width, height, label)
 kButton.prototype.draw = 
 function(canvas)
 {
-	canvas.drawRectangle(10, 10, 200, 200, kStyle.rectangle);
+	canvas.drawRoundedRectangle(this.x, this.y, this.width, 
+		this.height, 5, kStyle.button);
+	
+	canvas.drawBoundedText(this.x, this.y, this.width, 
+		this.height, this.label, kStyle.button);
 }
 
 // =====================================================================

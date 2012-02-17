@@ -65,6 +65,7 @@ function(style)
 	this.context.strokeStyle = style.lineColour;
 	this.context.lineWidth   = style.lineWidth;
 	this.context.fillStyle   = style.fillColour;
+	this.context.globalAlpha = style.opacity;
 	this.context.font        = style.textHeight + "px " + style.textFont;
 	this.context.shadowColor = style.shadowColour;
 	this.context.shadowBlur  = style.shadowBlur;

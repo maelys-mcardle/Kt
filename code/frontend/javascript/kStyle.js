@@ -5,6 +5,7 @@ var kStyle =
 		fillColour: "white",
 		lineColour: "black",
 		lineWidth: 1,
+		opacity: 1,
 		
 		shadowColour: "black",
 		shadowOffsetX: 0,
@@ -27,24 +28,15 @@ var kStyle =
 		fillColour: "#212121"
 	},
 	
-	rectangle: {
+	button: {
+		fillColour: "black",
+		lineColour: "white",
 		lineWidth: 2,
-		shadowColour: "white",
-		shadowBlur: 5,
-		shadowOffsetX: 2,
-		shadowOffsetY: 2
-	},
-	
-	text: {
 		textFont: "Vegur",
 		textColour: "white",
-		textHeight: 50,
+		textHeight: 20,
 		textLineSpacing: 1.2,
 		textAlign: kAlign.center,
-		textWrap: kWrap.noWrap
-	},
-	
-	image: {
-		imagePolicy: kImage.tile
-	},
+		textWrap: kWrap.wrapOnWords,
+	}
 };
