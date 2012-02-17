@@ -354,38 +354,56 @@ function(x, y, width, height, text, style)
 	
 	// Initialize the variables.
 	var remainingText = text.substring(0);
-	var textGeometry = new Array();
-	var yPosition = y;
-	var xPosition = x;
-	var line = "";
+	var lines = new Array();
+	var lineHeight = style.textHeight * style.textLineSpacing;
+	var lineSpacing = lineHeight - style.textHeight;
 
-	// Go line by line, until we run out of text or no more text fits.
-	while (yPosition + style.textHeight < y + height && 
-		remainingText.length > 0) {
+	// Get a list of all the lines that will fit in the bounds.
+	for (var yPosition = y + lineSpacing; 
+		yPosition+style.textHeight<y+height && remainingText.length > 0; 
+		yPosition += lineHeight) {
 		
 		// Get the characters to display.
 		wrapReturn = this.wrapTextToWidth(remainingText, width, style);
-		line          = wrapReturn.phrase;
 		remainingText = wrapReturn.remainingText;
-		
-		// Calculate the x position.
-		var lineSize = this.context.measureText(line).width;
+		lines.push(wrapReturn.phrase);
+	}
 	
+	// Initialize variables for the next set of processing.
+	var textGeometry = new Array();
+	var linesHeight = lineSpacing + lines.length * lineHeight;
+	var yPosition = y + lineSpacing;
+	var xPosition = x;
+	
+	// We now know the number of lines that fit. Align them vertically.
+	// Default is to align to the top.
+	if ((style.textAlign & kAlign.middle) == kAlign.middle)
+		yPosition = y + lineSpacing + (height - linesHeight) / 2;
+	if ((style.textAlign & kAlign.bottom) == kAlign.bottom)
+		yPosition = y + lineSpacing + height - linesHeight;
+		
+	// Draw each line.
+	for (var lineNumber = 0; lineNumber < lines.length; lineNumber++) {
+	
+		// Calculate the x position.
+		var phrase = lines[lineNumber];
+		var phraseWidth = this.context.measureText(phrase).width;
+		
 		// Align right or center. Default is align to the left.
-		if (style.textAlign == kAlign.right)
-			xPosition = x + width - lineSize;
-		if (style.textAlign == kAlign.center)
-			xPosition = x + (width - lineSize) / 2;
+		if ((style.textAlign & kAlign.right) == kAlign.right)
+			xPosition = x + width - phraseWidth;
+		if ((style.textAlign & kAlign.center) == kAlign.center)
+			xPosition = x + (width - phraseWidth) / 2;
 		
 		// Get the geometry of the characters.
-		textGeometry.push(this.getTextGeometry(xPosition, 
-			yPosition, line, style));
+		textGeometry.push(this.getTextGeometry(xPosition, yPosition, 
+			phrase, style));
 	
 		// Place the characters.
-		this.drawText(xPosition, yPosition, line, style);
+		this.drawText(xPosition, yPosition, phrase, style);
 		
 		// Going to next line.
-		yPosition += style.textHeight * style.textLineSpacing;
+		yPosition += lineHeight;
 	}
 	
 	// Return the amount of displayed text and its positions.

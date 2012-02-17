@@ -36,7 +36,7 @@ var kStyle =
 		textColour: "white",
 		textHeight: 20,
 		textLineSpacing: 1.2,
-		textAlign: kAlign.center,
+		textAlign: kAlign.center + kAlign.middle,
 		textWrap: kWrap.wrapOnWords,
 	}
 };
