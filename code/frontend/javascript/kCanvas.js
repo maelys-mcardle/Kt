@@ -356,12 +356,10 @@ function(x, y, width, height, text, style)
 	var remainingText = text.substring(0);
 	var lines = new Array();
 	var lineHeight = style.textHeight * style.textLineSpacing;
-	var lineSpacing = lineHeight - style.textHeight;
 
 	// Get a list of all the lines that will fit in the bounds.
-	for (var yPosition = y + lineSpacing; 
-		yPosition+style.textHeight<y+height && remainingText.length > 0; 
-		yPosition += lineHeight) {
+	for (var yPosition = y; yPosition + style.textHeight < y + height && 
+		remainingText.length > 0; yPosition += lineHeight) {
 		
 		// Get the characters to display.
 		wrapReturn = this.wrapTextToWidth(remainingText, width, style);
@@ -370,17 +368,17 @@ function(x, y, width, height, text, style)
 	}
 	
 	// Initialize variables for the next set of processing.
+	var linesHeight = style.textHeight + (lines.length- 1) * lineHeight;
 	var textGeometry = new Array();
-	var linesHeight = lineSpacing + lines.length * lineHeight;
-	var yPosition = y + lineSpacing;
+	var yPosition = y;
 	var xPosition = x;
 	
 	// We now know the number of lines that fit. Align them vertically.
 	// Default is to align to the top.
 	if ((style.textAlign & kAlign.middle) == kAlign.middle)
-		yPosition = y + lineSpacing + (height - linesHeight) / 2;
+		yPosition = y + (height - linesHeight) / 2;
 	if ((style.textAlign & kAlign.bottom) == kAlign.bottom)
-		yPosition = y + lineSpacing + height - linesHeight;
+		yPosition = y + height - linesHeight;
 		
 	// Draw each line.
 	for (var lineNumber = 0; lineNumber < lines.length; lineNumber++) {
