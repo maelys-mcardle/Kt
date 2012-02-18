@@ -27,5 +27,55 @@ function(canvas)
 }
 
 // =====================================================================
-// DRAW FUNCTION
+// FIND MOUSE/KEYBOARD ACTIVE AREA
 // =====================================================================
+
+kButton.prototype.getActiveArea = 
+function()
+{
+	return { x:this.x, y:this.y, width:this.width, height:this.height };
+}
+
+// =====================================================================
+// SET CALLBACK FUNCTION
+// =====================================================================
+
+kButton.prototype.setCallback = 
+function(trigger, callbackFunction)
+{
+	
+}
+
+// =====================================================================
+// MOUSE/KEYBOARD INTERACTION
+// =====================================================================
+
+kButton.prototype.onHover = 
+function(mouseX, mouseY)
+{
+	
+}
+
+kButton.prototype.onClick = 
+function(mouseX, mouseY)
+{
+	
+}
+
+kButton.prototype.onDoubleClick = 
+function(mouseX, mouseY)
+{
+	
+}
+
+kButton.prototype.onDrag = 
+function(startX, startY, endX, endY)
+{
+	
+}
+
+kButton.prototype.onKey = 
+function(character)
+{
+	
+}
