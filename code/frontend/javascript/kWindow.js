@@ -9,6 +9,9 @@ function kWindow(kCanvasObject)
 	
 	// Create an empty array to store the widgets.
 	this.widgets = new Array();
+	
+	// Initiate an event handler to grab mouse/keyboard input.
+	this.eventHandler = new kEventHandler();
 }
 
 // =====================================================================
@@ -18,6 +21,9 @@ function kWindow(kCanvasObject)
 kWindow.prototype.run = 
 function()
 {
+	// Interpret UI events.
+	this.interpretEvents();
+	
 	// Draw the background and the widgets.
 	this.drawWindow();
 	
@@ -34,6 +40,22 @@ kWindow.prototype.addWidget =
 function(kWidgetObject)
 {
 	this.widgets.push(kWidgetObject);
+}
+
+// =====================================================================
+// PASS UI INTERACTION TO WIDGET
+// =====================================================================
+
+kWindow.prototype.interpretEvents = 
+function()
+{
+	var events = this.eventHandler.getEvents();
+	
+	while (events.length > 0) {
+		var event = events.shift();
+	}
+		
+	
 }
 
 // =====================================================================
