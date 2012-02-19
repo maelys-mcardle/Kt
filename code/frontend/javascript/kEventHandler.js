@@ -7,38 +7,123 @@ function kEventHandler()
 	// Create an empty array to store the events queue.
 	this.events = new Array();
 	
+	// Variables to track mouse position.
+	this.mouseX = 0;
+	this.mouseY = 0;
+	
+	// Variables to handle mouse dragging.
+	this.dragStartX = 0;
+	this.dragStartY = 0;
+	this.dragThresholdReached = false;
+	this.dragMode = false;
+	
 	// Add handlers to capture UI interactions.
 	kEventHandlerInstance = this;
 	window.addEventListener("mousemove", 
-		function() {kEventHandlerInstance.appendEvent();}, false);
+		function() {kEventHandlerInstance.appendEvent();});
 	window.addEventListener("click", 
-		function() {kEventHandlerInstance.appendEvent();}, false);
+		function() {kEventHandlerInstance.appendEvent();});
 	window.addEventListener("dblclick", 
-		function() {kEventHandlerInstance.appendEvent();}, false);
+		function() {kEventHandlerInstance.appendEvent();});
 	window.addEventListener("mousedown", 
-		function() {kEventHandlerInstance.appendEvent();}, false);
+		function() {kEventHandlerInstance.appendEvent();});
 	window.addEventListener("mouseup", 
-		function() {kEventHandlerInstance.appendEvent();}, false);
+		function() {kEventHandlerInstance.appendEvent();});
 	window.addEventListener("keydown", 
-		function() {kEventHandlerInstance.appendEvent();}, false);
+		function() {kEventHandlerInstance.appendEvent();});
 }
 
 // =====================================================================
-// PASS UI INTERACTION TO EVENT QUEUE
+// INTERPRET UI INTERACTION AND PASS TO QUEUE
 // =====================================================================
 
 kEventHandler.prototype.appendEvent =
 function()
 {
-	this.events.push(window.event);
+	// Mouse event. Capture coordinates.
+	if (window.event.offsetX != "undefined") {
+		this.mouseX = window.event.offsetX;
+		this.mouseY = window.event.offsetY;
+	}
+	
+	// The mouse moved.
+	if (window.event.type == "mousemove") {
+		
+		// If we're in drag mode, determine if the drag threshold
+		// has been reached.
+		if (this.dragMode && !this.dragThresholdReached && 
+			(Math.abs(this.mouseX - this.dragStartX) > 
+			kGlobal.dragThreshold || Math.abs(this.mouseY - 
+			this.dragStartY) > kGlobal.dragThreshold))
+			this.dragThresholdReached = true;
+	
+		// If the drag threshold has been reached, this is a mouse drag.
+		if (this.dragMode && this.dragThresholdReached)
+			this.events.push({event: kEvent.drag, x: this.mouseX, 
+				y: this.mouseY, startX: this.dragStartX, 
+				startY: this.dragStartY});
+			
+		// Otherwise, this is a simple mouse move.
+		else this.events.push({event: kEvent.mouseMove, x: this.mouseX, 
+			y: this.mouseY});
+	}
+	
+	// User clicked.
+	else if (window.event.type == "click")
+		this.events.push({event: kEvent.click, x: this.mouseX, 
+			y: this.mouseY});
+	
+	// User double-clicked.
+	else if (window.event.type == "doubleclick")
+		this.events.push({event: kEvent.click, x: this.mouseX, 
+			y: this.mouseY});
+	
+	// User pushed the mouse button down.
+	else if (window.event.type == "mousedown") {
+		
+		// Go into drag mode. This means we'll check mouse positions
+		// from now on.
+		this.dragMode = true;
+		this.dragThresholdReached = false;
+		this.dragStartX = this.mouseX;
+		this.dragStartY = this.mouseY;
+	}
+	
+	// User released the mouse button.
+	else if (window.event.type == "mouseup") {
+		
+		// Identify that we're now out of drag mode.
+		this.dragMode = false;
+		
+		// If the threshold was reached, we were in drag mode.
+		// Therefore, emit a drag conclusion event.
+		if (this.dragThresholdReached)
+			this.events.push({event: kEvent.dragConclude, 
+				x: this.mouseX, y: this.mouseY, 
+				startX: this.dragStartX, startY: this.dragStartY});
+	}
+	
+	// User pressed a key on the keyboard.
+	else if (window.event.type == "keydown")
+		this.events.push({event: kEvent.keyPress, x: this.mouseX, y: 
+		this.mouseY, key: String.fromCharCode(window.event.keyCode)});
 }
 
 // =====================================================================
-// TRANSLATE EVENTS ON QUEUE AND RETURN THEM
+// RETURN EVENTS ON QUEUE
 // =====================================================================
 
 kEventHandler.prototype.getEvents = 
 function()
 {
-	return this.events;
+	// Make a new array that we'll send out.
+	var output = new Array();
+	
+	// Remove elements from the internal events array and push them
+	// to our output. This approach prevents data loss.
+	while (this.events.length > 0)
+		output.push(this.events.shift());
+	
+	// Return the array.
+	return output;
 }

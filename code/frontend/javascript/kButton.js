@@ -76,6 +76,12 @@ function(mouseX, mouseY)
 }
 
 kButton.prototype.onDrag = 
+function(startX, startY, currentX, currentY)
+{
+	return;
+}
+
+kButton.prototype.onDragConclude = 
 function(startX, startY, endX, endY)
 {
 	return;
