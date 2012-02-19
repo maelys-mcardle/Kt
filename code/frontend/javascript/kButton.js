@@ -66,7 +66,7 @@ function(mouseX, mouseY)
 kButton.prototype.onClick = 
 function(mouseX, mouseY)
 {
-	
+	alert("Click!");
 }
 
 kButton.prototype.onDoubleClick = 
@@ -88,7 +88,7 @@ function(startX, startY, endX, endY)
 }
 
 kButton.prototype.onKey = 
-function(character)
+function(mouseX, mouseY, character)
 {
 	
 }

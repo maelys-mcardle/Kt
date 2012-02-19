@@ -11,7 +11,7 @@ function kEventHandler()
 	this.mouseX = 0;
 	this.mouseY = 0;
 	
-	// Variables to handle mouse dragging.
+	// Variables to allow for mouse drag detection.
 	this.dragStartX = 0;
 	this.dragStartY = 0;
 	this.dragThresholdReached = false;
