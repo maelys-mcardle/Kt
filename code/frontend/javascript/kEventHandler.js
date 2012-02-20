@@ -104,9 +104,33 @@ function()
 	}
 	
 	// User pressed a key on the keyboard.
-	else if (window.event.type == "keydown")
-		this.events.push({event: kEvent.keyPress, x: this.mouseX, y: 
-		this.mouseY, key: String.fromCharCode(window.event.keyCode)});
+	else if (window.event.type == "keydown") {
+		
+		// Get the character from the keycode.
+		var character = this.keyCodeToASCII(window.event.keyCode,
+			window.event.shiftKey);
+		
+		// If the character is valid, create the event.
+		if (character != "")
+			this.events.push({event: kEvent.keyPress, x: this.mouseX, 
+				y: this.mouseY, key: character});
+	}
+}
+
+// =====================================================================
+// TRANSLATE KEYCODE TO ASCII
+// =====================================================================
+
+kEventHandler.prototype.keyCodeToASCII = 
+function(keyCode, shiftKey)
+{
+	// Translate the keycode to ASCII.
+	var character = (!shiftKey) ? kKeyboard.default[keyCode]:
+		kKeyboard.shift[keyCode];
+	
+	// Return our findings. Give an empty string if there's no match.
+	if (typeof character === "undefined") return "";
+	return character;
 }
 
 // =====================================================================
@@ -116,7 +140,7 @@ function()
 kEventHandler.prototype.getEvents = 
 function()
 {
-	// Make a new array that we'll send out.
+	// Make a new array that wkeye'll send out.
 	var output = new Array();
 	
 	// Remove elements from the internal events array and push them
