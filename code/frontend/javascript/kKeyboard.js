@@ -1,4 +1,19 @@
-const kKeyboard =
+// =====================================================================
+// LOOKUP TABLES
+// =====================================================================
+
+const kSpecialChar =
+{
+	// This list contains non-printable characters for which there is
+	// no ASCII escape sequence.
+	
+	leftArrow:  -1,
+	upArrow:    -2,
+	rightArrow: -3,
+	downArrow:  -4,
+}
+
+const kCharTable =
 {
 	// This contains the translation of keycodes to string characters,
 	// contained within blocks representing modifiers. The format is
@@ -10,6 +25,10 @@ const kKeyboard =
 		9: "\t",
 		13: "\n",
 		32: " ",
+		37: kSpecialChar.leftArrow,
+		38: kSpecialChar.upArrow,
+		39: kSpecialChar.rightArrow,
+		40: kSpecialChar.downArrow,
 		48: "0",
 		49: "1",
 		50: "2",
@@ -75,10 +94,6 @@ const kKeyboard =
 	},
 	
 	shift : {
-		8: "\b",
-		9: "\t",
-		13: "\n",
-		32: " ",
 		48: ")",
 		49: "!",
 		50: "@",
@@ -115,16 +130,6 @@ const kKeyboard =
 		88: "X",
 		89: "Y",
 		90: "Z",
-		96: "0",
-		97: "1",
-		98: "2",
-		99: "3",
-		100: "4",
-		101: "5",
-		102: "6",
-		103: "7",
-		104: "8",
-		105: "9",
 		106: "*",
 		107: "+",
 		109: "-",
@@ -142,5 +147,21 @@ const kKeyboard =
 		221: "}",
 		222: "\""
 	}
-	
 };
+
+// =====================================================================
+// LOOKUP FUNCTION
+// =====================================================================
+
+function keyEventToChar(event)
+{
+	// Translate a keyboard window.event action into a character. If the
+	// shift key is pressed, look up in the shift table. Fall back on
+	// the default table if need be.
+	if (event.shiftKey && typeof kCharTable.shift[event.keyCode] != 
+		"undefined") 
+		return kCharTable.shift[event.keyCode];
+		
+	// Return a character, or type "undefined" if none were found.
+	return kCharTable.default[event.keyCode];
+}

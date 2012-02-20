@@ -108,9 +108,7 @@ function()
 	else if (window.event.type == "keydown") {
 		
 		// Get the character from the given keycode.
-		var character = (!window.event.shiftKey) ? 
-			kKeyboard.default[window.event.keyCode]:
-			kKeyboard.shift[window.event.keyCode];
+		var character = keyEventToChar(window.event);
 		
 		// If a character is defined by the keycode, create the event.
 		if (typeof character != "undefined")
@@ -126,7 +124,7 @@ function()
 kEventHandler.prototype.getEvents = 
 function()
 {
-	// Make a new array that wkeye'll send out.
+	// Make a new array that we'll send out.
 	var output = new Array();
 	
 	// Remove elements from the internal events array and push them
