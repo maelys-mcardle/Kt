@@ -98,7 +98,7 @@ function()
 				this.callWidgetFunction(this.widgets[i], 
 					"onHover", [mouseX, mouseY]);
 			
-			else if (event.event == kEvent.keyPress) 
+			else if (event.event == kEvent.keyPress)
 				this.callWidgetFunction(this.widgets[i],
 					"onKey", [mouseX, mouseY, event.key]);
 		}

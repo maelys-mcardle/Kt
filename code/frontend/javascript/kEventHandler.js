@@ -41,7 +41,7 @@ kEventHandler.prototype.appendEvent =
 function()
 {
 	// Mouse event. Capture coordinates.
-	if (window.event.offsetX != "undefined") {
+	if (typeof window.event.offsetX != "undefined") {
 		this.mouseX = window.event.offsetX;
 		this.mouseY = window.event.offsetY;
 	}

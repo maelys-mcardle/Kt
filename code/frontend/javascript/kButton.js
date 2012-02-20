@@ -82,5 +82,5 @@ function(startX, startY, endX, endY)
 kButton.prototype.onKey = 
 function(mouseX, mouseY, character)
 {
-	alert("Key is " + character);
+	alert("Key is " + character + "(" + mouseX + "," + mouseY + ")");
 }
