@@ -86,13 +86,13 @@ function()
 			
 			else if (event.event == kEvent.drag)
 				this.callWidgetFunction(this.widgets[i], 
-					"onDrag", [event.startX, event.startY, 
-					mouseX, mouseY]);
+					"onDrag", [mouseX, mouseY, 
+					event.dragX, event.dragY]);
 			
 			else if (event.event == kEvent.dragConclusion)
 				this.callWidgetFunction(this.widgets[i], 
-					"onDragConclude", [event.startX, event.startY, 
-					mouseX, mouseY]);
+					"onDragConclude", [mouseX, mouseY, 
+					event.dragX, event.dragY]);
 			
 			else if (event.event == kEvent.mouseMove)
 				this.callWidgetFunction(this.widgets[i], 

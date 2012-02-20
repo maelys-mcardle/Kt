@@ -60,9 +60,9 @@ function()
 	
 		// If the drag threshold has been reached, this is a mouse drag.
 		if (this.dragMode && this.dragThresholdReached)
-			this.events.push({event: kEvent.drag, x: this.mouseX, 
-				y: this.mouseY, startX: this.dragStartX, 
-				startY: this.dragStartY});
+			this.events.push({event: kEvent.drag, 
+				x: this.dragStartX, y: this.dragStartY, 
+				dragX: this.mouseX, dragY: this.mouseY});
 			
 		// Otherwise, this is a simple mouse move.
 		else this.events.push({event: kEvent.mouseMove, x: this.mouseX, 
@@ -99,9 +99,9 @@ function()
 		// If the threshold was reached, we were in drag mode.
 		// Therefore, emit a drag conclusion event.
 		if (this.dragThresholdReached)
-			this.events.push({event: kEvent.dragConclude, 
-				x: this.mouseX, y: this.mouseY, 
-				startX: this.dragStartX, startY: this.dragharacStartY});
+			this.events.push({event: kEvent.dragConclusion, 
+				x: this.dragStartX, y: this.dragStartY, 
+				dragX: this.mouseX, dragY: this.mouseY});
 	}
 	
 	// User pressed a key on the keyboard.

@@ -76,6 +76,7 @@ function(startX, startY, currentX, currentY)
 kButton.prototype.onDragConclude = 
 function(startX, startY, endX, endY)
 {
+	alert("Drag conclude");
 	return;
 }
 
