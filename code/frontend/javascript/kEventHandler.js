@@ -41,7 +41,8 @@ kEventHandler.prototype.appendEvent =
 function()
 {
 	// Mouse event. Capture coordinates.
-	if (typeof window.event.offsetX != "undefined") {
+	if (typeof window.event.offsetX != "undefined" &&
+		window.event.offsetX > 0 && window.event.offsetY > 0) {
 		this.mouseX = window.event.offsetX;
 		this.mouseY = window.event.offsetY;
 	}
@@ -100,37 +101,22 @@ function()
 		if (this.dragThresholdReached)
 			this.events.push({event: kEvent.dragConclude, 
 				x: this.mouseX, y: this.mouseY, 
-				startX: this.dragStartX, startY: this.dragStartY});
+				startX: this.dragStartX, startY: this.dragharacStartY});
 	}
 	
 	// User pressed a key on the keyboard.
 	else if (window.event.type == "keydown") {
 		
-		// Get the character from the keycode.
-		var character = this.keyCodeToASCII(window.event.keyCode,
-			window.event.shiftKey);
+		// Get the character from the given keycode.
+		var character = (!window.event.shiftKey) ? 
+			kKeyboard.default[window.event.keyCode]:
+			kKeyboard.shift[window.event.keyCode];
 		
-		// If the character is valid, create the event.
-		if (character != "")
+		// If a character is defined by the keycode, create the event.
+		if (typeof character != "undefined")
 			this.events.push({event: kEvent.keyPress, x: this.mouseX, 
 				y: this.mouseY, key: character});
 	}
-}
-
-// =====================================================================
-// TRANSLATE KEYCODE TO ASCII
-// =====================================================================
-
-kEventHandler.prototype.keyCodeToASCII = 
-function(keyCode, shiftKey)
-{
-	// Translate the keycode to ASCII.
-	var character = (!shiftKey) ? kKeyboard.default[keyCode]:
-		kKeyboard.shift[keyCode];
-	
-	// Return our findings. Give an empty string if there's no match.
-	if (typeof character === "undefined") return "";
-	return character;
 }
 
 // =====================================================================
