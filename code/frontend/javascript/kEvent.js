@@ -5,5 +5,6 @@ const kEvent =
 	doubleClick:    3,
 	drag:           4,
 	dragConclusion: 5,
-	keyPress:       6
+	push:           6,
+	keyPress:       7
 };

@@ -85,11 +85,32 @@ function(style)
 	var properties = Object.keys(kStyle.default);
 	
 	// For each property that we have, look at the style and see if
-	// it has such a property. If it doesn't, populate it with the
+	// it has such a property. If it doesn't, see if its parents or
+	// ancestors have such a property. If no one has it, use the 
 	// default value.
+	
 	while (properties.length > 0) {
+		
+		// Get the property.
 		var propertyName = properties.pop();
-		if (typeof style[propertyName] === "undefined")
+		
+		// If the property is defined, go to the next.
+		if (typeof style[propertyName] != "undefined")
+			continue;
+	
+		// Cycle through the parents of this property.
+		for (var parent = style.parent; typeof parent != "undefined";
+			 parent = kStyle[parent].parent) {
+			
+			// If a parent has the property, use it.
+			if (typeof kStyle[parent][propertyName] != "undefined") {
+				style[propertyName] = kStyle[parent][propertyName];
+				break;
+			}
+		}
+
+		// If the property is still undefined, load the default.
+		if (typeof style[propertyName] == "undefined")
 			style[propertyName] = kStyle.default[propertyName];
 	}
 }

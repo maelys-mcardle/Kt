@@ -41,14 +41,12 @@ var kStyle =
 	},
 	
 	buttonHover: {
-		fillColour: "#a0a0a0",
-		lineColour: "white",
-		lineWidth: 2,
-		textFont: "Vegur",
-		textColour: "white",
-		textHeight: 20,
-		textLineSpacing: 1.2,
-		textAlign: kAlign.center + kAlign.middle,
-		textWrap: kWrap.wrapOnWords,
+		parent: "button", 
+		fillColour: "#a0a0a0"
+	},
+
+	buttonPush: {
+		parent: "button",
+		fillColour: "red"
 	}
 };

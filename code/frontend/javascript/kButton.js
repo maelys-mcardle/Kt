@@ -55,6 +55,12 @@ function(mouseX, mouseY)
 	this.style = kStyle.buttonHover;
 }
 
+kButton.prototype.onPush = 
+function(mouseX, mouseY)
+{
+	this.style = kStyle.buttonPush;
+}
+
 kButton.prototype.onClick = 
 function(mouseX, mouseY)
 {
@@ -76,7 +82,6 @@ function(startX, startY, currentX, currentY)
 kButton.prototype.onDragConclude = 
 function(startX, startY, endX, endY)
 {
-	alert("Drag conclude");
 	return;
 }
 

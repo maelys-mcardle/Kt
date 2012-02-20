@@ -88,6 +88,10 @@ function()
 		this.dragThresholdReached = false;
 		this.dragStartX = this.mouseX;
 		this.dragStartY = this.mouseY;
+		
+		// Also send a push event.
+		this.events.push({event: kEvent.push, x: this.mouseX, 
+			y: this.mouseY});
 	}
 	
 	// User released the mouse button.
