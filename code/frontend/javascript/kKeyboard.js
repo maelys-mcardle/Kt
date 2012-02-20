@@ -10,7 +10,7 @@ const kSpecialChar =
 	leftArrow:  -1,
 	upArrow:    -2,
 	rightArrow: -3,
-	downArrow:  -4,
+	downArrow:  -4
 }
 
 const kCharTable =
@@ -130,11 +130,6 @@ const kCharTable =
 		88: "X",
 		89: "Y",
 		90: "Z",
-		106: "*",
-		107: "+",
-		109: "-",
-		110: ".",
-		111: "/",
 		186: ":",
 		187: "+",
 		188: "<",
