@@ -13,14 +13,6 @@ function kButton(x, y, width, height, label)
 	
 	// Load defaults.
 	this.style = kStyle.button;
-	
-	// Load callbacks: functions called when events occur.
-	this.onClickCallback       = function() { };
-	this.onDoubleClickCallback = function() { };
-	this.onHoverCallback       = function() { };
-	this.onIdleCallback        = function() { };
-	this.onKeyCallback         = function() { };
-	this.onDragCallback        = function() { };
 }
 
 // =====================================================================
@@ -66,7 +58,7 @@ function(mouseX, mouseY)
 kButton.prototype.onClick = 
 function(mouseX, mouseY)
 {
-	alert("Click!");
+	alert("Click! " + mouseX + " " + mouseY);
 }
 
 kButton.prototype.onDoubleClick = 
@@ -90,5 +82,5 @@ function(startX, startY, endX, endY)
 kButton.prototype.onKey = 
 function(mouseX, mouseY, character)
 {
-	
+	alert("Key is " + character);
 }

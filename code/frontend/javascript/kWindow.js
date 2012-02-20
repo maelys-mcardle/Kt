@@ -52,8 +52,6 @@ function()
 {
 	// Get the events and the mouse position from the event handler.
 	var events = this.eventHandler.getEvents();
-	var mouseX = this.eventHandler.mouseX;
-	var mouseY = this.eventHandler.mouseY;
 	
 	// Go event by event.
 	while (events.length > 0) {
@@ -73,48 +71,50 @@ function()
 			// Widget is idle if mouse falls outside its active area.
 			if (mouseX < activeArea.x || mouseX > activeArea.x +
 				activeArea.width || mouseY < activeArea.y ||
-				mouseY > activeArea.y + activeArea.height) {
-				this.widgets[i].onIdle(mouseX, mouseY);
-				this.widgets[i].onIdleCallback(event);
-			} 
+				mouseY > activeArea.y + activeArea.height)
+				this.callWidgetFunction(this.widgets[i], 
+					"onIdle", [mouseX, mouseY]);
 			
 			// Handle events passed through.
-			else if (event.event == kEvent.click) {
-				this.widgets[i].onClick(mouseX, mouseY);
-				this.widgets[i].onClickCallback(event);
-			} 
+			else if (event.event == kEvent.click)
+				this.callWidgetFunction(this.widgets[i], 
+					"onClick", [mouseX, mouseY]);
 			
-			else if (event.event == kEvent.doubleclick) {
-				this.widgets[i].onDoubleClick(mouseX, mouseY);
-				this.widgets[i].onDoubleClickCallback(event);
-			} 
+			else if (event.event == kEvent.doubleclick)
+				this.callWidgetFunction(this.widgets[i], 
+					"onDoubleClick", [mouseX, mouseY]);
 			
-			else if (event.event == kEvent.drag) {
-				this.widgets[i].onDrag(event.startX, event.startY, 
-					mouseX, mouseY);
-				this.widgets[i].onDragCallback(event);
-			} 
+			else if (event.event == kEvent.drag)
+				this.callWidgetFunction(this.widgets[i], 
+					"onDrag", [event.startX, event.startY, 
+					mouseX, mouseY]);
 			
-			else if (event.event == kEvent.dragConclusion) {
-				this.widgets[i].onDragConclude(event.startX,
-					event.startY, mouseX, mouseY);
-				this.widgets[i].onDragConcludeCallback(event);
-			} 
+			else if (event.event == kEvent.dragConclusion)
+				this.callWidgetFunction(this.widgets[i], 
+					"onDragConclude", [event.startX, event.startY, 
+					mouseX, mouseY]);
 			
-			else if (event.event == kEvent.mouseMove) {
-				this.widgets[i].onHover(mouseX, mouseY);
-				this.widgets[i].onHoverCallback(event);
-			}
+			else if (event.event == kEvent.mouseMove)
+				this.callWidgetFunction(this.widgets[i], 
+					"onHover", [mouseX, mouseY]);
 			
-			else if (event.event == kEvent.keyPress) {
-				this.widgets[i].onKey(mouseX, mouseY, event.key);
-				this.widgets[i].onKeyCallback(event);
-			}
-			
+			else if (event.event == kEvent.keyPress) 
+				this.callWidgetFunction(this.widgets[i],
+					"onKey", [mouseX, mouseY, event.key]);
 		}
 	}
-		
+}
+
+kWindow.prototype.callWidgetFunction = 
+function(widget, method, arguments)
+{
+	// If the function is defined, call it.
+	if (typeof widget[method] != "undefined")
+		widget[method].apply(widget, arguments);
 	
+	// If the function callback is defined, call it.
+	if (typeof widget[method + "Callback"] != "undefined")
+		widget[method + "Callback"].apply(widget, arguments);
 }
 
 // =====================================================================
