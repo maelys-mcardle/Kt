@@ -71,17 +71,3 @@ function(mouseX, mouseY)
 {
 	return;
 }
-
-kButton.prototype.onDoubleClick = 
-function(mouseX, mouseY)
-{
-	this.onClick(mouseX, mouseY);
-}
-
-kButton.prototype.onKey = 
-function(mouseX, mouseY, character)
-{
-	// Pressing ENTER or SPACE activates the button.
-	if (character == "\n" || character == " ")
-		this.onClick(mouseX, mouseY);
-}

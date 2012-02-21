@@ -106,6 +106,10 @@ function()
 			this.events.push({event: kEvent.dragConclusion, 
 				x: this.dragStartX, y: this.dragStartY, 
 				dragX: this.mouseX, dragY: this.mouseY});
+			
+		// Otherwise, we were in mouse move mode.
+		else this.events.push({event: kEvent.mouseMove, x: this.mouseX, 
+			y: this.mouseY});	
 	}
 	
 	// User pressed a key on the keyboard.
