@@ -61,16 +61,20 @@ function()
 		
 		// Go widget by widget and see if the event applies to it.
 		for (var i = 0; i < this.widgets.length; i++) {
-			
+				
 			// Get the mouse coordinates from the event, and the
 			// active area for the mouse from the widget.
-			var activeArea = this.widgets[i].getActiveArea();
+			var activeArea = typeof this.widgets[i]["getActiveArea"] !=
+				"undefined" ? this.widgets[i].getActiveArea() : 0;
 			mouseX = event.x;
 			mouseY = event.y;
 			
-			// Widget is idle if mouse falls outside its active area.
-			if (mouseX < activeArea.x || mouseX > activeArea.x +
-				activeArea.width || mouseY < activeArea.y ||
+			// Widget is idle if mouse falls outside its active area or
+			// has no active area defined to begin with.
+			if (activeArea == 0 || 
+				mouseX < activeArea.x || 
+				mouseX > activeArea.x + activeArea.width || 
+				mouseY < activeArea.y ||
 				mouseY > activeArea.y + activeArea.height)
 				this.callWidgetFunction(this.widgets[i], 
 					"onIdle", [mouseX, mouseY]);
@@ -94,7 +98,7 @@ function()
 					"onDragConclude", [mouseX, mouseY, 
 					event.dragX, event.dragY]);
 			
-			else if (event.event == kEvent.mouseMove)
+			else if (event.event == kEvent.mouseUpdate)
 				this.callWidgetFunction(this.widgets[i], 
 					"onHover", [mouseX, mouseY]);
 			

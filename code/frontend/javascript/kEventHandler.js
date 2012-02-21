@@ -65,8 +65,8 @@ function()
 				dragX: this.mouseX, dragY: this.mouseY});
 			
 		// Otherwise, this is a simple mouse move.
-		else this.events.push({event: kEvent.mouseMove, x: this.mouseX, 
-			y: this.mouseY});
+		else this.events.push({event: kEvent.mouseUpdate, 
+			x: this.mouseX, y: this.mouseY});
 	}
 	
 	// User clicked.
@@ -108,8 +108,8 @@ function()
 				dragX: this.mouseX, dragY: this.mouseY});
 			
 		// Otherwise, we were in mouse move mode.
-		else this.events.push({event: kEvent.mouseMove, x: this.mouseX, 
-			y: this.mouseY});	
+		else this.events.push({event: kEvent.mouseUpdate, 
+			x: this.mouseX, y: this.mouseY});	
 	}
 	
 	// User pressed a key on the keyboard.

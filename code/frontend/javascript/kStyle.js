@@ -21,7 +21,9 @@ var kStyle =
 		
 		imagePolicy: kImage.stretch,
 		
-		gradientOrientation: kGradient.horizontal
+		gradientOrientation: kGradient.horizontal,
+		
+		padding: 10
 	},
 	
 	background: {
@@ -42,12 +44,12 @@ var kStyle =
 	
 	buttonHover: {
 		parent: "button", 
-		fillColour: "#a0a0a0"
+		fillColour: "#2A2A2A"
 	},
 
 	buttonPush: {
 		parent: "button",
-		fillColour: "red"
+		fillColour: "#4A4A4A"
 	},
 	
 	label: {
@@ -57,5 +59,18 @@ var kStyle =
 		textLineSpacing: 1.2,
 		textAlign: kAlign.left + kAlign.top,
 		textWrap: kWrap.wrapOnWords
+	},
+	
+	lineEdit: {
+		fillColour: "white",
+		lineColour: "black",
+		lineWidth: 2,
+		textFont: "Vegur",
+		textColour: "black",
+		textHeight: 20,
+		textLineSpacing: 1.2,
+		textAlign: kAlign.left + kAlign.middle,
+		textWrap: kWrap.wrapOnCharacter,
+		padding: 10
 	}
 };

@@ -4,12 +4,15 @@ function main(canvasId)
 	canvas = new kCanvas(canvasId);
 	mainWindow = new kWindow(canvas);
 
-	button = new kButton(20, 20, 100, 50, "Press Me");
+	label = new kLabel(20, 20, 300, 100, "Korgi Widgets");
+	mainWindow.addWidget(label);
+	
+	button = new kButton(20, 80, 100, 50, "Press Me");
 	button.onClickCallback = function() { } ;
 	mainWindow.addWidget(button);
 	
-	label = new kLabel(200, 20, 150, 100, "Press Me");
-	mainWindow.addWidget(label);
+	line = new kLineEdit(20, 140, 300, 50, "Sample text...");
+	mainWindow.addWidget(line);
 	
 	mainWindow.run();
 }

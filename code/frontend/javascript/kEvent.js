@@ -1,6 +1,6 @@
 const kEvent = 
 {
-	mouseMove:      1,
+	mouseUpdate:    1,
 	click:          2,
 	doubleClick:    3,
 	drag:           4,

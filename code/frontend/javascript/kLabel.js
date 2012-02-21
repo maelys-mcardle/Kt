@@ -25,19 +25,3 @@ function(canvas)
 	canvas.drawBoundedText(this.x, this.y, this.width, 
 		this.height, this.label, this.style);
 }
-
-// =====================================================================
-// FIND MOUSE/KEYBOARD ACTIVE AREA
-// =====================================================================
-
-kLabel.prototype.getActiveArea = 
-function()
-{
-	return { x:this.x, y:this.y, width:this.width, height:this.height };
-}
-
-// =====================================================================
-// MOUSE/KEYBOARD INTERACTION
-// =====================================================================
-
-// There is no interaction for the label widget.
