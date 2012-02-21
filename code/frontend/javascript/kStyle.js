@@ -70,7 +70,7 @@ var kStyle =
 		textHeight: 20,
 		textLineSpacing: 1.2,
 		textAlign: kAlign.left + kAlign.middle,
-		textWrap: kWrap.wrapOnCharacter,
+		textWrap: kWrap.noWrap,
 		padding: 10
 	}
 };

@@ -10,7 +10,9 @@ const kSpecialChar =
 	leftArrow:  -1,
 	upArrow:    -2,
 	rightArrow: -3,
-	downArrow:  -4
+	downArrow:  -4,
+	delete:     -5,
+	backspace:  -6
 }
 
 const kCharTable =
@@ -21,7 +23,7 @@ const kCharTable =
 	// keycodes when no modifier is applied.
 	
 	default : {
-		8: "\b",
+		8: kSpecialChar.backspace,
 		9: "\t",
 		13: "\n",
 		32: " ",
@@ -29,6 +31,7 @@ const kCharTable =
 		38: kSpecialChar.upArrow,
 		39: kSpecialChar.rightArrow,
 		40: kSpecialChar.downArrow,
+		46: kSpecialChar.delete,
 		48: "0",
 		49: "1",
 		50: "2",
