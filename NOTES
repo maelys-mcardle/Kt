@@ -33,6 +33,7 @@ function kButton(x, y, width, height, label)
 	this.onIdleCallback        = function() { };
 	this.onKeyCallback         = function() { };
 	this.onDragCallback        = function() { };
+	this.onPushCallback        = function() { };
 }
 
 kButton.prototype.onIdle = 
@@ -52,6 +53,9 @@ function(startX, startY, currentX, currentY)
 
 kButton.prototype.onDragConclude = 
 function(startX, startY, endX, endY)
+
+kButton.prototype.onPush = 
+function(mouseX, mouseY)
 
 kButton.prototype.onKey = 
 function(mouseX, mouseY, character)

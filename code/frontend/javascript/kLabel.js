@@ -2,34 +2,26 @@
 // BASE FUNCTION
 // =====================================================================
 
-function kButton(x, y, width, height, label)
+function kLabel(x, y, width, height, text)
 {
 	// Store the button properties from function parameters.
 	this.x = x;
 	this.y = y;
 	this.width  = width;
 	this.height = height;
-	this.label  = label;
+	this.label  = text;
 	
 	// Default style.
-	this.style = kStyle.button;
-	
-	// Style for different object states.
-	this.styleIdle  = kStyle.button;
-	this.styleHover = kStyle.buttonHover;
-	this.stylePush  = kStyle.buttonPush;
+	this.style = kStyle.label;
 }
 
 // =====================================================================
 // DRAW FUNCTION
 // =====================================================================
 
-kButton.prototype.draw = 
+kLabel.prototype.draw = 
 function(canvas)
 {
-	canvas.drawRoundedRectangle(this.x, this.y, this.width, 
-		this.height, 5, this.style);
-	
 	canvas.drawBoundedText(this.x, this.y, this.width, 
 		this.height, this.label, this.style);
 }
@@ -38,7 +30,7 @@ function(canvas)
 // FIND MOUSE/KEYBOARD ACTIVE AREA
 // =====================================================================
 
-kButton.prototype.getActiveArea = 
+kLabel.prototype.getActiveArea = 
 function()
 {
 	return { x:this.x, y:this.y, width:this.width, height:this.height };
@@ -48,40 +40,4 @@ function()
 // MOUSE/KEYBOARD INTERACTION
 // =====================================================================
 
-kButton.prototype.onIdle = 
-function(mouseX, mouseY)
-{
-	this.style = this.styleIdle;
-}
-
-kButton.prototype.onHover = 
-function(mouseX, mouseY)
-{
-	this.style = this.styleHover;
-}
-
-kButton.prototype.onPush = 
-function(mouseX, mouseY)
-{
-	this.style = this.stylePush;
-}
-
-kButton.prototype.onClick = 
-function(mouseX, mouseY)
-{
-	return;
-}
-
-kButton.prototype.onDoubleClick = 
-function(mouseX, mouseY)
-{
-	this.onClick(mouseX, mouseY);
-}
-
-kButton.prototype.onKey = 
-function(mouseX, mouseY, character)
-{
-	// Pressing ENTER or SPACE activates the button.
-	if (character == "\n" || character == " ")
-		this.onClick(mouseX, mouseY);
-}
+// There is no interaction for the label widget.

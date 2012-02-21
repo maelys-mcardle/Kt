@@ -48,5 +48,14 @@ var kStyle =
 	buttonPush: {
 		parent: "button",
 		fillColour: "red"
+	},
+	
+	label: {
+		textFont: "Vegur",
+		textColour: "white",
+		textHeight: 30,
+		textLineSpacing: 1.2,
+		textAlign: kAlign.left + kAlign.top,
+		textWrap: kWrap.wrapOnWords
 	}
 };

@@ -8,5 +8,8 @@ function main(canvasId)
 	button.onClickCallback = function() { alert("wee"); } ;
 	mainWindow.addWidget(button);
 	
+	label = new kLabel(200, 20, 150, 100, "Press Me");
+	mainWindow.addWidget(label);
+	
 	mainWindow.run();
 }
