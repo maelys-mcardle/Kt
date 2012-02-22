@@ -23,7 +23,8 @@ var kStyle =
 		
 		gradientOrientation: kGradient.horizontal,
 		
-		padding: 10
+		padding: 10,
+		margin: 10
 	},
 	
 	background: {
@@ -82,5 +83,18 @@ var kStyle =
 	textCursorHint: {
 		parent: "textCursor",
 		lineColour: "grey"
+	},
+	
+	checkbox: {
+		fillColour: "black",
+		lineColour: "white",
+		lineWidth: 2,
+		textFont: "Vegur",
+		textColour: "white",
+		textHeight: 20,
+		textLineSpacing: 1.2,
+		textAlign: kAlign.left + kAlign.middle,
+		textWrap: kWrap.noWrap,
+		padding: 5
 	}
 };

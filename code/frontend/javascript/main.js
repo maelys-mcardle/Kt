@@ -14,5 +14,8 @@ function main(canvasId)
 	line = new kLineEdit(20, 140, 300, 50, "Sample text...");
 	mainWindow.addWidget(line);
 	
+	checkbox = new kCheckbox(20, 200, 200, 25, "Check me out");
+	mainWindow.addWidget(checkbox);
+	
 	mainWindow.run();
 }
