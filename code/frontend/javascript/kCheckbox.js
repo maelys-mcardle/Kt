@@ -4,7 +4,7 @@
 
 function kCheckbox(x, y, width, height, label)
 {
-	// Store the button properties from function parameters.
+	// Store the properties from function parameters.
 	this.x = x;
 	this.y = y;
 	this.width  = width;

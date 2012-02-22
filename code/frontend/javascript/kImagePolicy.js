@@ -1,4 +1,4 @@
-const kImage = 
+const kImagePolicy = 
 {
 	native:   0,
 	tile:     1,

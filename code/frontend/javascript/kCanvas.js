@@ -304,13 +304,13 @@ function(x, y, width, height, filepath, style)
 	
 	// Draw the image in fill mode. The image fills the given width and
 	// height. Aspect ratio is not preserved.
-	if (style.imagePolicy == kImage.fill)
+	if (style.imagePolicy == kImagePolicy.fill)
 		this.context.drawImage(image, x, y, width, height);
 	
 	// Draw the image in native mode. If the width and height are
 	// smaller than the image dimensions, clip the image. If they're
 	// bigger, keep the image at its original size.
-	else if (style.imagePolicy == kImage.native) 
+	else if (style.imagePolicy == kImagePolicy.native) 
 		this.context.drawImage(image, 0, 0,
 			image.width < width ? image.width : width,
 			image.height < height ? image.height : height,
@@ -321,7 +321,7 @@ function(x, y, width, height, filepath, style)
 	// Draw the image in stretch mode. Its contents are resized to
 	// maximize real estate within the boundaries specified, whilst
 	// keeping the aspect ratio.
-	else if (style.imagePolicy == kImage.stretch)
+	else if (style.imagePolicy == kImagePolicy.stretch)
 		this.context.drawImage(image, x, y,
 			(width / height) < (image.width / image.height) ? 
 				width : (height / image.height) * image.width, 
@@ -330,7 +330,7 @@ function(x, y, width, height, filepath, style)
 		
 	// Draw the image in tile mode. Its contents are repeated
 	// vertically and horizontally within the bounds specified.
-	else if (style.imagePolicy == kImage.tile) {
+	else if (style.imagePolicy == kImagePolicy.tile) {
 		
 		// Generate the pattern - the tiled images.
 		pattern = this.context.createPattern(image, "repeat");

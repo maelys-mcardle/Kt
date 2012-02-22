@@ -19,7 +19,8 @@ var kStyle =
 		textAlign: kAlign.left,
 		textWrap: kWrap.wrapOnWords,
 		
-		imagePolicy: kImage.stretch,
+		imagePolicy: kImagePolicy.stretch,
+		imageAlign: kAlign.left + kAlign.top,
 		
 		gradientOrientation: kGradient.horizontal,
 		
@@ -96,5 +97,10 @@ var kStyle =
 		textAlign: kAlign.left + kAlign.middle,
 		textWrap: kWrap.noWrap,
 		padding: 5
+	},
+	
+	image: {
+		imagePolicy: kImagePolicy.native,
+		imageAlign: kAlign.left + kAlign.top
 	}
 };
