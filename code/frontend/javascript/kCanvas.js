@@ -548,7 +548,8 @@ function(x, y, text, style)
 		var width = this.context.measureText(char).width;
 		
 		// Put together the position/size properties of the character.
-		geometry.push([char, xPosition, y, width, style.textHeight]);
+		geometry.push({character: char, x: xPosition, y: y, 
+			width: width, height: style.textHeight});
 		
 		// Keep track of our position.
 		xPosition += width;

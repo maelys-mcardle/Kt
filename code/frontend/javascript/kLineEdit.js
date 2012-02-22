@@ -12,7 +12,8 @@ function kLineEdit(x, y, width, height, text)
 	this.text   = text;
 	
 	// Default options.
-	this.cursorPosition = 0;
+	this.cursorPosition = this.text.length;
+	this.cursorVisible = true;
 	this.displayedTextOffset = 0;
 	this.displayedTextData = 0;
 	this.style = kStyle.lineEdit;
@@ -49,9 +50,32 @@ function(canvas)
 		this.style.padding, this.y, textWidth, this.height, 
 		this.text.substring(this.displayedTextOffset), this.style);
 	
-	// Draw the cursor.
+	// Draw the cursor
+	this.drawCursor(canvas, this.displayedTextData.geometry);
+}
+
+kLineEdit.prototype.drawCursor = 
+function(canvas, textGeometry)
+{
+	// If there's no text data, or cursors shouldn't be visible, abort.
+	if (textGeometry.length == 0 || this.cursorVisible == false)
+		return;
 	
+	// If we're in the range of known characters.
+	else if (this.cursorPosition - this.displayedTextOffset 
+		< textGeometry[0].length) {
+		var geometry = textGeometry[0][this.cursorPosition 
+			- this.displayedTextOffset];
+		canvas.drawLine(geometry.x, geometry.y, 1, 
+			geometry.height, kStyle.textCursor);
+	} 
 	
+	// If we're after the last character, there's a special case.
+	else {
+		var geometry = textGeometry[0][textGeometry[0].length - 1];
+		canvas.drawLine(geometry.x + geometry.width, geometry.y, 1, 
+			geometry.height, kStyle.textCursor);
+	}
 }
 
 // =====================================================================
@@ -68,27 +92,33 @@ function()
 // MOUSE/KEYBOARD INTERACTION
 // =====================================================================
 
-kLineEdit.prototype.onIdle = 
-function(mouseX, mouseY)
-{
-	return;
-}
-
-kLineEdit.prototype.onHover = 
-function(mouseX, mouseY)
-{
-	// If we haven't acquired text geometry data, abort.
-	if (this.displayedTextData == 0) return;
-	
-	// Find the offset that's the closest to the mouse.
-	
-	
-}
-
 kLineEdit.prototype.onClick = 
 function(mouseX, mouseY)
 {
-	return;
+	// If we haven't acquired text geometry data, abort.
+	if (this.displayedTextData == 0 || 
+		this.displayedTextData.geometry.length == 0 ||
+		this.displayedTextData.geometry[0].length == 0) 
+		return;
+
+	// Create a shortcut and the variables we'll use.
+	var geometry = this.displayedTextData.geometry[0];
+	var closestX = Math.abs(geometry[0].x - mouseX);
+	var closestIndex = 0;
+	
+	// Find the offset that's the closest to the mouse.
+	for (var i = 1; i < geometry.length; i++) {
+		if (Math.abs(geometry[i].x - mouseX) < closestX) {
+			closestX = Math.abs(geometry[i].x - mouseX);
+			closestIndex = i;
+		}
+		if (Math.abs(geometry[i].x+geometry[i].width-mouseX)<closestX) {
+			closestIndex = i+1;
+		}
+	}
+	
+	// Update the cursor to the new position.
+	this.cursorPosition = this.displayedTextOffset + closestIndex;
 }
 
 kLineEdit.prototype.onKey = 

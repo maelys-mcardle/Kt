@@ -72,5 +72,15 @@ var kStyle =
 		textAlign: kAlign.left + kAlign.middle,
 		textWrap: kWrap.noWrap,
 		padding: 10
+	},
+	
+	textCursor: {
+		lineColour: "grey",
+		lineWidth: 1
+	},
+	
+	textCursorHint: {
+		parent: "textCursor",
+		lineColour: "grey"
 	}
 };
