@@ -5,6 +5,7 @@ var kStyle =
 		fillColour: "white",
 		lineColour: "black",
 		lineWidth: 1,
+		lineEnd: "butt",
 		opacity: 1,
 		
 		shadowColour: "black",
@@ -90,6 +91,7 @@ var kStyle =
 		fillColour: "black",
 		lineColour: "white",
 		lineWidth: 2,
+		lineEnd: "round",
 		textFont: "Vegur",
 		textColour: "white",
 		textHeight: 20,

@@ -64,6 +64,7 @@ function(style)
 	// Load in properties defined by the style.
 	this.context.strokeStyle = style.lineColour;
 	this.context.lineWidth   = style.lineWidth;
+	this.context.lineCap     = style.lineEnd;
 	this.context.fillStyle   = style.fillColour;
 	this.context.globalAlpha = style.opacity;
 	this.context.font        = style.textHeight + "px " + style.textFont;
