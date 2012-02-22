@@ -59,7 +59,7 @@ function()
 // MOUSE/KEYBOARD INTERACTION
 // =====================================================================
 
-kCheckbox.prototype.onClick = 
+kCheckbox.prototype.onPush = 
 function(mouseX, mouseY)
 {
 	this.checked = !this.checked;
