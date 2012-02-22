@@ -12,8 +12,9 @@ function kCheckbox(x, y, width, height, label)
 	this.label  = label;
 	
 	// Default options.
-	this.style   = kStyle.checkbox;
-	this.checked = false;
+	this.style    = kStyle.checkbox;
+	this.boxWidth = (this.height < this.width) ? this.height:this.width;
+	this.checked  = false;
 }
 
 // =====================================================================
@@ -23,27 +24,24 @@ function kCheckbox(x, y, width, height, label)
 kCheckbox.prototype.draw = 
 function(canvas)
 {
-	// Get the width of the checkbox.
-	var boxWidth = (this.height < this.width) ? this.height:this.width;
-	
 	// Draw the box containing the tick.
 	canvas.drawRoundedRectangle(this.x, this.y, this.height, 
-		boxWidth, 5, this.style);
+		this.boxWidth, 5, this.style);
 	
 	// Draw the tick.
 	if (this.checked == true) {
 		var padding = this.style.padding;
 		canvas.drawLine(this.x + padding, this.y + padding, 
-			boxWidth - 2 * padding, this.height - 2 * padding, 
+			this.boxWidth - 2 * padding, this.height - 2 * padding, 
 			this.style);
-		canvas.drawLine(this.x + boxWidth - padding, 
-			this.y + padding, -boxWidth + 2 * padding, 
+		canvas.drawLine(this.x + this.boxWidth - padding, 
+			this.y + padding, -this.boxWidth + 2 * padding, 
 			this.height - 2 * padding, this.style);
 	}
 	
 	// Draw the text.
-	canvas.drawBoundedText(this.x + boxWidth + this.style.margin, 
-		this.y, this.width - boxWidth - this.style.margin, 
+	canvas.drawBoundedText(this.x + this.boxWidth + this.style.margin, 
+		this.y, this.width - this.boxWidth - this.style.margin, 
 		this.height, this.label, this.style);
 }
 
@@ -54,7 +52,7 @@ function(canvas)
 kCheckbox.prototype.getActiveArea = 
 function()
 {
-	return { x:this.x, y:this.y, width:this.width, height:this.height };
+	return {x:this.x,y:this.y,width:this.boxWidth,height:this.height};
 }
 
 // =====================================================================
