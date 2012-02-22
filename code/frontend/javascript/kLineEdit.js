@@ -107,7 +107,7 @@ function(mouseX, mouseY)
 	var closestIndex = 0;
 	
 	// Find the offset that's the closest to the mouse.
-	for (var i = 1; i < geometry.length; i++) {
+	for (var i = 0; i < geometry.length; i++) {
 		if (Math.abs(geometry[i].x - mouseX) < closestX) {
 			closestX = Math.abs(geometry[i].x - mouseX);
 			closestIndex = i;
