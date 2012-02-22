@@ -103,6 +103,6 @@ var kStyle =
 	
 	image: {
 		imagePolicy: kImagePolicy.native,
-		imageAlign: kAlign.left + kAlign.top
+		imageAlign: kAlign.center + kAlign.middle
 	}
 };

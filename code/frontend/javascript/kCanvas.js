@@ -302,33 +302,14 @@ function(x, y, width, height, filepath, style)
 	// Load the image in.
 	var image = new Image();
 	image.src = filepath;
-	
+		
 	// Draw the image in fill mode. The image fills the given width and
 	// height. Aspect ratio is not preserved.
-	if (style.imagePolicy == kImagePolicy.fill)
+	if (style.imagePolicy == kImagePolicy.fill) {
 		this.context.drawImage(image, x, y, width, height);
+		return;
+	}
 	
-	// Draw the image in native mode. If the width and height are
-	// smaller than the image dimensions, clip the image. If they're
-	// bigger, keep the image at its original size.
-	else if (style.imagePolicy == kImagePolicy.native) 
-		this.context.drawImage(image, 0, 0,
-			image.width < width ? image.width : width,
-			image.height < height ? image.height : height,
-			x, y,
-			image.width < width ? image.width : width,
-			image.height < height ? image.height : height);
-		
-	// Draw the image in stretch mode. Its contents are resized to
-	// maximize real estate within the boundaries specified, whilst
-	// keeping the aspect ratio.
-	else if (style.imagePolicy == kImagePolicy.stretch)
-		this.context.drawImage(image, x, y,
-			(width / height) < (image.width / image.height) ? 
-				width : (height / image.height) * image.width, 
-			(width / height) < (image.width / image.height) ? 
-				(width / image.width) * image.height : height);
-		
 	// Draw the image in tile mode. Its contents are repeated
 	// vertically and horizontally within the bounds specified.
 	else if (style.imagePolicy == kImagePolicy.tile) {
@@ -346,7 +327,51 @@ function(x, y, width, height, filepath, style)
 		
 		// Restore the translation back.
 		this.context.translate(-x, -y);
+		return;
 	}	
+	
+	// Setup variables.
+	var imageWidth   = width;
+	var imageHeight  = height;
+	var sourceWidth  = image.width;
+	var sourceHeight = image.height;
+	var xPosition    = x;
+	var yPosition    = y;
+	
+	// Draw the image in native mode. If the width and height are
+	// smaller than the image dimensions, clip the image. If they're
+	// bigger, keep the image at its original size.
+	if (style.imagePolicy == kImagePolicy.native) {
+		sourceWidth  = image.width < width ? image.width : width;
+		sourceHeight = image.height < height ? image.height : height;
+		imageWidth   = sourceWidth;
+		imageHeight  = sourceHeight;
+	}
+		
+	// Draw the image in stretch mode. Its contents are resized to
+	// maximize real estate within the boundaries specified, whilst
+	// keeping the aspect ratio.
+	else if (style.imagePolicy == kImagePolicy.stretch) {
+		imageWidth = (width / height) < (image.width / image.height) ? 
+			width : (height / image.height) * image.width;
+		imageHeight = (width / height) < (image.width / image.height) ? 
+			(width / image.width) * image.height : height;
+	}
+	
+	// Image alignment handling. Default is top left.
+	if ((style.imageAlign & kAlign.right) == kAlign.right)
+		xPosition = x + width - imageWidth;
+	else if ((style.imageAlign & kAlign.center) == kAlign.center)
+		xPosition = x + (width - imageWidth) / 2;
+	
+	if ((style.imageAlign & kAlign.bottom) == kAlign.bottom)
+		yPosition = y + height - imageHeight;
+	else if ((style.imageAlign & kAlign.middle) == kAlign.middle)
+		yPosition = y + (height - imageHeight) / 2;
+		
+	// Draw the image for native/stretch mode.
+	this.context.drawImage(image, 0, 0, sourceWidth, sourceHeight,
+		xPosition, yPosition, imageWidth, imageHeight);
 }
 
 // =====================================================================
