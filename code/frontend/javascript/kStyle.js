@@ -102,7 +102,7 @@ var kStyle =
 	},
 	
 	image: {
-		imagePolicy: kImagePolicy.native,
-		imageAlign: kAlign.center + kAlign.middle
+		imagePolicy: kImagePolicy.stretch,
+		imageAlign: kAlign.center + kAlign.top
 	}
 };

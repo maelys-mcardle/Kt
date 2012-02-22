@@ -302,17 +302,10 @@ function(x, y, width, height, filepath, style)
 	// Load the image in.
 	var image = new Image();
 	image.src = filepath;
-		
-	// Draw the image in fill mode. The image fills the given width and
-	// height. Aspect ratio is not preserved.
-	if (style.imagePolicy == kImagePolicy.fill) {
-		this.context.drawImage(image, x, y, width, height);
-		return;
-	}
 	
 	// Draw the image in tile mode. Its contents are repeated
 	// vertically and horizontally within the bounds specified.
-	else if (style.imagePolicy == kImagePolicy.tile) {
+	if (style.imagePolicy == kImagePolicy.tile) {
 		
 		// Generate the pattern - the tiled images.
 		pattern = this.context.createPattern(image, "repeat");
@@ -330,7 +323,7 @@ function(x, y, width, height, filepath, style)
 		return;
 	}	
 	
-	// Setup variables.
+	// Setup image variables. The default is fill mode.
 	var imageWidth   = width;
 	var imageHeight  = height;
 	var sourceWidth  = image.width;

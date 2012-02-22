@@ -17,7 +17,7 @@ function main(canvasId)
 	checkbox = new kCheckbox(20, 200, 200, 25, "Check me out");
 	mainWindow.addWidget(checkbox);
 	
-	picture = new kImage(20, 250, 100, 100, "../../icon/korgi.svg");
+	picture = new kImage(20, 250, 100, 200, "../../icon/korgi.svg");
 	mainWindow.addWidget(picture);
 	
 	mainWindow.run();
