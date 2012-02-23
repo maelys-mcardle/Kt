@@ -3,6 +3,8 @@ function main(canvasId)
 {
 	canvas = new kCanvas(canvasId);
 	mainWindow = new kWindow(canvas);
+	
+	
 
 	label = new kLabel(20, 20, 300, 100, "Korgi Widgets");
 	mainWindow.addWidget(label);
