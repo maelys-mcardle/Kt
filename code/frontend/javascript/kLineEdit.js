@@ -13,7 +13,7 @@ function kLineEdit(x, y, width, height, text)
 	
 	// Default options.
 	this.cursorPosition = this.text.length;
-	this.cursorVisible = true;
+	this.cursorVisible = false;
 	this.displayedTextOffset = 0;
 	this.displayedTextData = 0;
 	this.style = kStyle.lineEdit;
@@ -119,6 +119,18 @@ function(mouseX, mouseY)
 	
 	// Update the cursor to the new position.
 	this.cursorPosition = this.displayedTextOffset + closestIndex;
+}
+
+kLineEdit.prototype.onFocus = 
+function(mouseX, mouseY)
+{
+	this.cursorVisible = true;
+}
+
+kLineEdit.prototype.onBlur = 
+function(mouseX, mouseY)
+{
+	this.cursorVisible = false;
 }
 
 kLineEdit.prototype.onKey = 

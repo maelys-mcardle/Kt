@@ -10,6 +10,9 @@ function kWindow(kCanvasObject)
 	// Create an empty array to store the widgets.
 	this.widgets = new Array();
 	
+	// The widget that has focus.
+	this.widgetIndexWithFocus = -1;
+	
 	// Initiate an event handler to grab mouse/keyboard input.
 	this.eventHandler = new kEventHandler();
 }
@@ -59,6 +62,14 @@ function()
 		// Grab the event from the queue.
 		var event = events.shift();
 		
+		// Note which widget had focus last time.
+		var lastWidgetWithFocus = this.widgetIndexWithFocus;
+		
+		// Reset the widget focus if this is a click event.
+		if (event.event == kEvent.doubleclick || 
+			event.event == kEvent.click)
+			this.widgetIndexWithFocus = -1;
+		
 		// Go widget by widget and see if the event applies to it.
 		for (var i = 0; i < this.widgets.length; i++) {
 				
@@ -80,13 +91,17 @@ function()
 					"onIdle", [mouseX, mouseY]);
 			
 			// Handle events passed through.
-			else if (event.event == kEvent.click)
+			else if (event.event == kEvent.click) {
 				this.callWidgetFunction(this.widgets[i], 
 					"onClick", [mouseX, mouseY]);
+				this.widgetIndexWithFocus = i;
+			}
 			
-			else if (event.event == kEvent.doubleclick)
+			else if (event.event == kEvent.doubleclick) {
 				this.callWidgetFunction(this.widgets[i], 
 					"onDoubleClick", [mouseX, mouseY]);
+				this.widgetIndexWithFocus = i;
+			}
 			
 			else if (event.event == kEvent.drag)
 				this.callWidgetFunction(this.widgets[i], 
@@ -106,9 +121,22 @@ function()
 				this.callWidgetFunction(this.widgets[i], 
 					"onPush", [mouseX, mouseY]);
 			
-			else if (event.event == kEvent.keyPress)
+			// Pass keypress events to the widget with focus.
+			if (event.event == kEvent.keyPress && 
+				i == this.widgetIndexWithFocus)
 				this.callWidgetFunction(this.widgets[i],
 					"onKey", [mouseX, mouseY, event.key]);
+				
+			// Send a special call to the widget with focus.
+			if ((event.event == kEvent.click || event.event == 
+				kEvent.doubleclick) && this.widgetIndexWithFocus == i)
+				this.callWidgetFunction(this.widgets[i],
+					"onFocus", [mouseX, mouseY]);
+				
+			// Send a special call to the widget that lost focus.
+			if (lastWidgetWithFocus==i && this.widgetIndexWithFocus!=i)
+				this.callWidgetFunction(this.widgets[i],
+					"onBlur", [mouseX, mouseY]);
 		}
 	}
 }

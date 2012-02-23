@@ -8,3 +8,6 @@ To compile, run:
 
 Followed by:
 	make
+
+To run, do:
+	./korgi

@@ -59,3 +59,9 @@ function(mouseX, mouseY)
 
 kButton.prototype.onKey = 
 function(mouseX, mouseY, character)
+
+kLineEdit.prototype.onFocus = 
+function(mouseX, mouseY)
+
+kLineEdit.prototype.onBlur = 
+function(mouseX, mouseY)
