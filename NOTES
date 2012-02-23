@@ -24,44 +24,54 @@ These are notes that I keep during the development process of korgi...
 
 ------------------------------------------------------------------------
 
-function kButton(x, y, width, height, label)
+// Widget function declaration
+function kWidget(x, y, width, height, widget-specific-arguments, ...)
 {
-	// Load callbacks: functions called when events occur.
-	this.onClickCallback       = function() { };
-	this.onDoubleClickCallback = function() { };
-	this.onHoverCallback       = function() { };
-	this.onIdleCallback        = function() { };
-	this.onKeyCallback         = function() { };
-	this.onDragCallback        = function() { };
-	this.onPushCallback        = function() { };
+	// Mandatory properties.
+	this.x
+	this.y
+	this.width
+	this.height
 }
 
-kButton.prototype.onIdle = 
+// Mandatory Methods
+kWidget.prototype.draw = 
+function(canvas)
+
+// Optional Methods
+kWidget.prototype.getActiveArea = 
+function()
+{
+	return { x:this.x, y:this.y, width:this.width, height:this.height };
+}
+
+
+kWidget.prototype.onIdle = 
 function(mouseX, mouseY)
 
-kButton.prototype.onHover = 
+kWidget.prototype.onHover = 
 function(mouseX, mouseY)
 
-kButton.prototype.onClick = 
+kWidget.prototype.onClick = 
 function(mouseX, mouseY)
 
-kButton.prototype.onDoubleClick = 
+kWidget.prototype.onDoubleClick = 
 function(mouseX, mouseY)
 
-kButton.prototype.onDrag = 
+kWidget.prototype.onDrag = 
 function(startX, startY, currentX, currentY)
 
-kButton.prototype.onDragConclude = 
+kWidget.prototype.onDragConclude = 
 function(startX, startY, endX, endY)
 
-kButton.prototype.onPush = 
+kWidget.prototype.onPush = 
 function(mouseX, mouseY)
 
-kButton.prototype.onKey = 
+kWidget.prototype.onKey = 
 function(mouseX, mouseY, character)
 
-kLineEdit.prototype.onFocus = 
+kWidget.prototype.onFocus = 
 function(mouseX, mouseY)
 
-kLineEdit.prototype.onBlur = 
+kWidget.prototype.onBlur = 
 function(mouseX, mouseY)

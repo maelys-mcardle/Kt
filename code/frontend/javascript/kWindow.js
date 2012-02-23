@@ -10,8 +10,11 @@ function kWindow(kCanvasObject)
 	// Create an empty array to store the widgets.
 	this.widgets = new Array();
 	
-	// The widget that has focus.
+	// Track the widget that has focus.
 	this.widgetIndexWithFocus = -1;
+	
+	// Set the root layout to define the placement of the widgets.
+	this.rootLayout = 0;
 	
 	// Initiate an event handler to grab mouse/keyboard input.
 	this.eventHandler = new kEventHandler();
