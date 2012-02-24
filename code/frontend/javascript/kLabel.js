@@ -9,7 +9,7 @@ function kLabel(x, y, width, height, text)
 	this.y = y;
 	this.width  = width;
 	this.height = height;
-	this.label  = text;
+	this.text  = text;
 	
 	// Default style.
 	this.style = kStyle.label;
@@ -23,5 +23,5 @@ kLabel.prototype.draw =
 function(canvas)
 {
 	canvas.drawBoundedText(this.x, this.y, this.width, 
-		this.height, this.label, this.style);
+		this.height, this.text, this.style);
 }
