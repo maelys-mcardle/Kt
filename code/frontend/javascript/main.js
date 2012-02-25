@@ -17,7 +17,17 @@ function main(canvasId)
 	// mainWindow.addWidget(label);
 	
 	hLayoutTop = new kLayout(mainWindow, kLayoutPolicy.horizontal);
-	label = new kWidget(kLabel, hLayoutTop, kLayoutPolicy.expand, 300, 100, 0, 0, "Korgi Widgets");
+	label = new kWidget(mainWindow, kLabel, kStyle.label, "Korgi Widgets");
+	
+	label.x = 100;
+	label.y = 30;
+	label.style.width = 100;
+	label.maximumHeight = 0;
+	label.layoutPolicy = kLayoutPolicy.expanding;
+	label.text = "Fun times";
+	
+	
+	label2 = new kWidget(mainWindow, kLabel, "Korgi Widgets");
 	
 	//hLayoutTop.createWidget(kLabel, kLayoutPolicy.expand, 300, 100, 0, 0, "Korgi Widgets");
 	//hLayoutTop.addWidget(button);
@@ -31,6 +41,5 @@ function main(canvasId)
 	vLayout.addLayout(hLayoutMiddle);
 	//vLayout.addWidget(checkbox);
 	
-	mainWindow.setLayout(vLayout);
 	mainWindow.run();
 }

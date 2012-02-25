@@ -2,6 +2,15 @@ var kStyle =
 {
 	// The default for all objects until initialized otherwise.
 	default: {
+		
+		width: 100,
+		height: 100,
+		padding: 10,
+		margin: 10,
+		radius: 5,
+		
+		layoutPolicy: kLayoutPolicy.expanding,
+		
 		fillColour: "white",
 		lineColour: "black",
 		lineWidth: 1,
@@ -23,10 +32,7 @@ var kStyle =
 		imagePolicy: kImagePolicy.stretch,
 		imageAlign: kAlign.left + kAlign.top,
 		
-		gradientOrientation: kGradient.horizontal,
-		
-		padding: 10,
-		margin: 10
+		gradientOrientation: kGradient.horizontal
 	},
 	
 	background: {

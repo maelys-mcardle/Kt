@@ -2,7 +2,7 @@
 // BASE FUNCTION
 // =====================================================================
 
-function kLayout(policy)
+function kLayout(parent, policy)
 {
 	// Create an empty array to store the layout and widgets.
 	this.items = new Array();

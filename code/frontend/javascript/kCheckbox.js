@@ -13,8 +13,17 @@ function kCheckbox(x, y, width, height, label)
 	
 	// Default options.
 	this.style    = kStyle.checkbox;
-	this.boxWidth = (this.height < this.width) ? this.height:this.width;
 	this.checked  = false;
+}
+
+// =====================================================================
+// GET WIDTH OF CHECKBOX ITSELF
+// =====================================================================
+
+kCheckbox.prototype.checkboxWidth =
+function (width, height)
+{
+	return (height < width) ? height : width;
 }
 
 // =====================================================================
@@ -24,24 +33,27 @@ function kCheckbox(x, y, width, height, label)
 kCheckbox.prototype.draw = 
 function(canvas)
 {
+	// Get the checkbox width.
+	var boxWidth = checkboxWidth(this.width, this.height);
+	var padding  = this.style.padding;
+	
 	// Draw the box containing the tick.
 	canvas.drawRoundedRectangle(this.x, this.y, this.height, 
-		this.boxWidth, 5, this.style);
+		boxWidth, this.style.radius, this.style);
 	
 	// Draw the tick.
 	if (this.checked == true) {
-		var padding = this.style.padding;
 		canvas.drawLine(this.x + padding, this.y + padding, 
-			this.boxWidth - 2 * padding, this.height - 2 * padding, 
+			boxWidth - 2 * padding, this.height - 2 * padding, 
 			this.style);
-		canvas.drawLine(this.x + this.boxWidth - padding, 
-			this.y + padding, -this.boxWidth + 2 * padding, 
+		canvas.drawLine(this.x + boxWidth - padding, 
+			this.y + padding, -boxWidth + 2 * padding, 
 			this.height - 2 * padding, this.style);
 	}
 	
 	// Draw the text.
-	canvas.drawBoundedText(this.x + this.boxWidth + this.style.margin, 
-		this.y, this.width - this.boxWidth - this.style.margin, 
+	canvas.drawBoundedText(this.x + boxWidth + this.style.margin, 
+		this.y, this.width - boxWidth - this.style.margin, 
 		this.height, this.label, this.style);
 }
 
@@ -52,7 +64,8 @@ function(canvas)
 kCheckbox.prototype.getActiveArea = 
 function()
 {
-	return {x:this.x,y:this.y,width:this.boxWidth,height:this.height};
+	return {x: this.x, y: this.y, width: checkboxWidth(this.width, 
+		this.height), height: this.height};
 }
 
 // =====================================================================

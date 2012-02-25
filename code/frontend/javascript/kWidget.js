@@ -2,20 +2,20 @@
 // BASE FUNCTION
 // =====================================================================
 
-function kWidget(widget, parent, policy, width, height, maxWidth, maxHeight,
-	widgetParameters)
+function kWidget(parent, widget, style)
 {
-	// Generate the arguments to pass onto the function.
-	var argumentList = new Array();
-	for (var i = 1; i < arguments.length; i++)
+	// Generate the arguments to pass onto the function. Every parameter
+	// used in calling the kWidget function after the mandatory parent
+	// and widget identifier is considered a parameter of that widget.
+	var argumentList = [0, 0, 200, 200];
+	for (var i = 2; i < arguments.length; i++)
 		argumentList.push(arguments[i]);
 
 	// Create the widget to maintain.
 	this.widget = new widget;
 	widget.apply(this.widget, argumentList);
 	
-	
-	this.widget.x = 200;
-	
+	// Add this widget to the parent.
+	parent.addWidget(this.widget);
 	return this.widget;
 }
