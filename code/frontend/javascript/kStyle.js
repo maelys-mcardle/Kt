@@ -1,10 +1,16 @@
+// =====================================================================
+// STYLE DEFINITION
+// =====================================================================
+
 var kStyle = 
 {
 	// The default for all objects until initialized otherwise.
 	default: {
 		
-		width: 100,
-		height: 100,
+		defaultWidth: 100,
+		defaultHeight: 100,
+		defaultMaximumWidth:  kLayoutPolicy.noMaximum,
+		defaultMaximumHeight: kLayoutPolicy.noMaximum,
 		padding: 10,
 		margin: 10,
 		radius: 5,
@@ -39,6 +45,14 @@ var kStyle =
 		fillColour: "#212121"
 	},
 	
+	widget: {
+		defaultWidth: 100,
+		defaultHeight: 100,
+		defaultMaximumWidth:  kLayoutPolicy.noMaximum,
+		defaultMaximumHeight: kLayoutPolicy.noMaximum,
+		layoutPolicy: kLayoutPolicy.expanding
+	},
+	
 	button: {
 		fillColour: "black",
 		lineColour: "white",
@@ -62,6 +76,8 @@ var kStyle =
 	},
 	
 	label: {
+		defaultWidth: 500,
+		defaultHeight: 100,
 		textFont: "Vegur",
 		textColour: "white",
 		textHeight: 30,
@@ -112,3 +128,43 @@ var kStyle =
 		imageAlign: kAlign.center + kAlign.top
 	}
 };
+
+// =====================================================================
+// LOAD DEFAULTS/PARENT VALUES INTO STYLE
+// =====================================================================
+
+function initializeStyle(style)
+{
+	// List the properties of the default style.
+	var properties = Object.keys(kStyle.default);
+	
+	// For each property that we have, look at the style and see if
+	// it has such a property. If it doesn't, see if its parents or
+	// ancestors have such a property. If no one has it, use the 
+	// default value.
+	
+	while (properties.length > 0) {
+		
+		// Get the property.
+		var propertyName = properties.pop();
+		
+		// If the property is defined, go to the next.
+		if (typeof style[propertyName] != "undefined")
+			continue;
+	
+		// Cycle through the parents of this property.
+		for (var parent = style.parent; typeof parent != "undefined";
+			 parent = kStyle[parent].parent) {
+			
+			// If a parent has the property, use it.
+			if (typeof kStyle[parent][propertyName] != "undefined") {
+				style[propertyName] = kStyle[parent][propertyName];
+				break;
+			}
+		}
+
+		// If the property is still undefined, load the default.
+		if (typeof style[propertyName] == "undefined")
+			style[propertyName] = kStyle.default[propertyName];
+	}
+}

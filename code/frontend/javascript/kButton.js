@@ -30,7 +30,7 @@ function(canvas)
 	canvas.drawRoundedRectangle(this.x, this.y, this.width,
 		this.height, this.style.radius, this.style);
 	
-	canvas.drawBoundedText(this.x, this.y, this.style.width, 
+	canvas.drawBoundedText(this.x, this.y, this.width, 
 		this.height, this.label, this.style);
 }
 
