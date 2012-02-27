@@ -2,13 +2,14 @@
 // BASE FUNCTION
 // =====================================================================
 
-function kLayout(parent, policy)
+function kLayout(window, policy)
 {
 	// Create an empty array to store the layout and widgets.
 	this.items = new Array();
 	
-	// Store the policy defined for this layout.
+	// Store the parent & policy defined for this layout.
 	this.policy = policy;
+	this.window = window;
 }
 
 // =====================================================================
@@ -19,6 +20,7 @@ kLayout.prototype.addWidget =
 function(kWidgetObject)
 {
 	this.items.push([kLayoutType.widget, kWidgetObject]);
+	this.window.addWidget(kWidgetObject);
 }
 
 // =====================================================================
@@ -32,5 +34,12 @@ function(kLayoutObject)
 }
 
 // =====================================================================
-// CALCULATE SIZE OF LAYOUT
+// UPDATE POSITION/SIZE OF ITEMS IN LAYOUT
 // =====================================================================
+
+kLayout.prototype.updateContentGeometry = 
+function(maximumWidth, maximumHeight)
+{
+	
+	
+}

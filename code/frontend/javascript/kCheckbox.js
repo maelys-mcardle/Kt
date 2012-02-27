@@ -2,14 +2,14 @@
 // BASE FUNCTION
 // =====================================================================
 
-function kCheckbox(x, y, width, height, label)
+function kCheckbox(x, y, width, height, text)
 {
 	// Store the properties from function parameters.
 	this.x = x;
 	this.y = y;
 	this.width  = width;
 	this.height = height;
-	this.label  = label;
+	this.text   = text;
 	
 	// Default options.
 	this.style    = kStyle.checkbox;
@@ -54,7 +54,7 @@ function(canvas)
 	// Draw the text.
 	canvas.drawBoundedText(this.x + boxWidth + this.style.margin, 
 		this.y, this.width - boxWidth - this.style.margin, 
-		this.height, this.label, this.style);
+		this.height, this.text, this.style);
 }
 
 // =====================================================================

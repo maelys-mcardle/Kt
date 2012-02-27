@@ -27,6 +27,11 @@ function kWindow(kCanvasObject)
 kWindow.prototype.run = 
 function()
 {
+	// Update layouts.
+	if (typeof this.rootLayout.updateContentGeometry != "undefined")
+		this.rootLayout.updateContentGeometry(this.canvas.width,
+			this.canvas.height);
+	
 	// Send user interaction off to widgets.
 	this.updateWidgets();
 	

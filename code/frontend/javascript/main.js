@@ -16,32 +16,13 @@ function main(canvasId)
 	//label = new kWidget(kLabel, 20, 20, 300, 100, "Korgi is fun");
 	// mainWindow.addWidget(label);
 	
+	label = new kLabel(0, 0, 300, 100, "Korgi Widgets");
+	button = new kButton(100, 10, 100, 50, "Push");
+	
 	hLayoutTop = new kLayout(mainWindow, kLayoutPolicy.horizontal);
-	label = new kWidget(mainWindow, kLabel, 200, 300, "Korgi Widgets");
+	hLayoutTop.addWidget(label);
+	hLayoutTop.addWidget(button);
 	
-	label.x = 100;
-	label.y = 30;
-	label.width = 200;
-	label.maximumHeight = kLayoutPolicy.noMaximum;
-	label.layoutPolicy = kLayoutPolicy.expanding;
-	label.text = "Fun times";
-	
-	
-	label2 = new kWidget(mainWindow, kLabel, 200, 300, "Korgi Widgets");
-	label2.x = 10;
-	label2.y = 10;
-	
-	//hLayoutTop.createWidget(kLabel, kLayoutPolicy.expand, 300, 100, 0, 0, "Korgi Widgets");
-	//hLayoutTop.addWidget(button);
-	
-	hLayoutMiddle = new kLayout(kLayoutPolicy.horizontal);
-	//hLayoutMiddle.addWidget(line);
-	//hLayoutMiddle.addWidget(picture);
-	
-	vLayout = new kLayout(kLayoutPolicy.vertical);
-	vLayout.addLayout(hLayoutTop);
-	vLayout.addLayout(hLayoutMiddle);
-	//vLayout.addWidget(checkbox);
-	
+	mainWindow.setLayout(hLayoutTop);
 	mainWindow.run();
 }

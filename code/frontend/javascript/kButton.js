@@ -2,14 +2,14 @@
 // BASE FUNCTION
 // =====================================================================
 
-function kButton(x, y, width, height, label)
+function kButton(x, y, width, height, text)
 {
 	// Store the properties from function parameters.
 	this.x = x;
 	this.y = y;
 	this.width  = width;
 	this.height = height;
-	this.label  = label;
+	this.text   = text;
 	
 	// Default style.
 	this.style = kStyle.button;
@@ -31,7 +31,7 @@ function(canvas)
 		this.height, this.style.radius, this.style);
 	
 	canvas.drawBoundedText(this.x, this.y, this.width, 
-		this.height, this.label, this.style);
+		this.height, this.text, this.style);
 }
 
 // =====================================================================
