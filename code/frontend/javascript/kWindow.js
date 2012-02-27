@@ -33,8 +33,8 @@ function()
 	// Draw the background and the widgets.
 	this.drawWindow();
 
-	// Update layouts.
-	this.updateLayouts();
+	// Update root layout.
+	this.updateLayout();
 	
 	// Wait before running the event loop again.
 	kWindowInstance = this;
@@ -52,7 +52,7 @@ function(kLayoutObject)
 	this.rootLayout = kLayoutObject;
 }
 
-kWindow.prototype.updateLayouts = 
+kWindow.prototype.updateLayout = 
 function()
 {
 	if (typeof this.rootLayout.updateLayout != "undefined")

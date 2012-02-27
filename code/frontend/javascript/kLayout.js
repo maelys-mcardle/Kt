@@ -10,9 +10,6 @@ function kLayout(kWindowObject, orientation)
 	// Store the window & orientation defined for this layout.
 	this.orientation = orientation;
 	this.window = kWindowObject;
-	
-	// Get the style for the layout.
-	this.style = getStyle(kStyle.layout);
 }
 
 // =====================================================================
@@ -46,12 +43,21 @@ function(x, y, maximumWidth, maximumHeight)
 	var horizontal = (this.orientation == kOrientation.horizontal);
 	var availableSpace = (horizontal) ? maximumWidth : maximumHeight;
 	var dynamicItems = 0;
+	var xPosition = x;
+	var yPosition = y;
 	
 	// Go through each item to gather data.
 	for (var i = 0; i < this.items.length; i++) {
 		
 		// Shortcut to the item.
 		var item = this.items[i];
+		
+		// If the item is a layout, count it as a dynamically sized
+		// item and go to the next.
+		if (typeof item.updateLayout != "undefined") {
+			dynamicItems++;
+			continue;
+		}
 		
 		// Get the policy & size, depending on what the target 
 		// orientation is.
@@ -67,15 +73,12 @@ function(x, y, maximumWidth, maximumHeight)
 			dynamicItems++;
 		
 		if (typeof item.style.margin == "number")
-			availableSpace -= item.style.margin*2;
-		
+			availableSpace -= item.style.margin * 2;
 	}
 	
-	// Set the initial coordinates, as well as the size each dynamic
-	// item will take.
-	var xPosition = x;
-	var yPosition = y;
-	var dynamicItemSize = availableSpace / dynamicItems;
+	// Define how many pixels each dynamically-sized item will take.
+	var dynamicItemSize = (availableSpace > 0 && dynamicItems > 0) ? 
+		availableSpace / dynamicItems : 0;
 	
 	// Go through all the items again, this time to set their position
 	// and size.
@@ -83,6 +86,25 @@ function(x, y, maximumWidth, maximumHeight)
 		
 		// Shortcut to the item.
 		var item = this.items[i];
+		
+		// If the item is a layout, count it as a dynamically sized
+		// item and go to the next.
+		if (typeof item.updateLayout != "undefined") {
+			
+			// Determine the width/height of the child layout.
+			var width = (horizontal) ? dynamicItemSize : maximumWidth;
+			var height = (horizontal) ? maximumHeight : dynamicItemSize;
+			
+			// Update the child layout.
+			item.updateLayout(xPosition, yPosition, width, height);
+			
+			// Increment the position and go to the next item.
+			xPosition += (horizontal) ? width : 0;
+			yPosition += (horizontal) ? 0 : height;
+			continue;
+		}
+		
+		// Get the item margin.
 		var margin = (typeof item.style.margin == "number") ?
 			item.style.margin : 0;
 		
@@ -90,8 +112,7 @@ function(x, y, maximumWidth, maximumHeight)
 		item.x = xPosition + margin;
 		item.y = yPosition + margin;
 		
-		// Resize the item to fit, and append the margin that's after
-		// the item.
+		// Resize the item to fit (items placed horizontally.)
 		if (horizontal) {
 			item.width = (item.style.widthPolicy == 
 				kLayoutPolicy.static)? item.baseWidth : dynamicItemSize;
@@ -99,6 +120,8 @@ function(x, y, maximumWidth, maximumHeight)
 				kLayoutPolicy.static)? item.baseHeight : maximumHeight -
 				2*margin;
 			xPosition = margin + item.width + item.x;
+			
+		// Resize the item to fit (items placed vertically.)
 		} else {
 			item.width = (item.style.widthPolicy == 
 				kLayoutPolicy.static)? item.baseWidth : maximumWidth - 

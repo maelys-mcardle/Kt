@@ -65,6 +65,7 @@ var kStyle =
 	},
 	
 	label: {
+		widthPolicy: kLayoutPolicy.static,
 		heightPolicy: kLayoutPolicy.dynamic,
 		textFont: "Vegur",
 		textColour: "white",
@@ -109,11 +110,6 @@ var kStyle =
 	image: {
 		imagePolicy: kImagePolicy.stretch,
 		imageAlign: kAlign.center + kAlign.top
-	},
-	
-	layout: {
-		widthPolicy: kLayoutPolicy.dynamic,
-		heightPolicy: kLayoutPolicy.dynamic
 	}
 };
 
