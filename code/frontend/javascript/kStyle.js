@@ -7,15 +7,12 @@ var kStyle =
 	// The default for all objects until initialized otherwise.
 	default: {
 		
-		defaultWidth: 100,
-		defaultHeight: 100,
-		defaultMaximumWidth:  kLayoutPolicy.noMaximum,
-		defaultMaximumHeight: kLayoutPolicy.noMaximum,
+		widthPolicy: kLayoutPolicy.expanding,
+		heightPolicy: kLayoutPolicy.fixed,
+		
 		padding: 10,
 		margin: 10,
 		radius: 5,
-		
-		layoutPolicy: kLayoutPolicy.expanding,
 		
 		fillColour: "white",
 		lineColour: "black",
@@ -43,14 +40,6 @@ var kStyle =
 	
 	background: {
 		fillColour: "#212121"
-	},
-	
-	widget: {
-		defaultWidth: 100,
-		defaultHeight: 100,
-		defaultMaximumWidth:  kLayoutPolicy.noMaximum,
-		defaultMaximumHeight: kLayoutPolicy.noMaximum,
-		layoutPolicy: kLayoutPolicy.expanding
 	},
 	
 	button: {
@@ -102,11 +91,6 @@ var kStyle =
 	textCursor: {
 		lineColour: "grey",
 		lineWidth: 1
-	},
-	
-	textCursorHint: {
-		parent: "textCursor",
-		lineColour: "grey"
 	},
 	
 	checkbox: {

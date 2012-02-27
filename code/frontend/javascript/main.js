@@ -17,7 +17,7 @@ function main(canvasId)
 	// mainWindow.addWidget(label);
 	
 	hLayoutTop = new kLayout(mainWindow, kLayoutPolicy.horizontal);
-	label = new kWidget(mainWindow, kLabel, "Korgi Widgets");
+	label = new kWidget(mainWindow, kLabel, 200, 300, "Korgi Widgets");
 	
 	label.x = 100;
 	label.y = 30;
@@ -27,7 +27,7 @@ function main(canvasId)
 	label.text = "Fun times";
 	
 	
-	label2 = new kWidget(mainWindow, kLabel, "Korgi Widgets");
+	label2 = new kWidget(mainWindow, kLabel, 200, 300, "Korgi Widgets");
 	label2.x = 10;
 	label2.y = 10;
 	
