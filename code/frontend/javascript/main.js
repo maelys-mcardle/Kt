@@ -18,10 +18,13 @@ function main(canvasId)
 	
 	label = new kLabel(0, 0, 300, 100, "Korgi Widgets");
 	button = new kButton(100, 10, 100, 50, "Push");
+	button2 = new kButton(100, 10, 100, 50, "Push");
 	
-	hLayoutTop = new kLayout(mainWindow, kLayoutPolicy.horizontal);
+	hLayoutTop = new kLayout(mainWindow, kOrientation.vertical);
 	hLayoutTop.addWidget(label);
 	hLayoutTop.addWidget(button);
+	hLayoutTop.addWidget(button2);
+	
 	
 	mainWindow.setLayout(hLayoutTop);
 	mainWindow.run();

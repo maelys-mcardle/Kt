@@ -90,7 +90,7 @@ function(x, y, width, height, startColour, endColour, style, property)
 	this.loadStyle(style);
 	
 	// Create the gradient.
-	var gradient = (style.gradientOrientation == kGradient.horizontal) ?
+	var gradient = (style.gradientOrientation==kOrientation.horizontal)?
 		this.context.createLinearGradient(x, y, x + width, y):
 		this.context.createLinearGradient(x, y, x, y + height);
 	

@@ -35,7 +35,7 @@ var kStyle =
 		imagePolicy: kImagePolicy.stretch,
 		imageAlign: kAlign.left + kAlign.top,
 		
-		gradientOrientation: kGradient.horizontal
+		gradientOrientation: kOrientation.horizontal
 	},
 	
 	background: {
@@ -51,7 +51,7 @@ var kStyle =
 		textHeight: 20,
 		textLineSpacing: 1.2,
 		textAlign: kAlign.center + kAlign.middle,
-		textWrap: kWrap.wrapOnWords,
+		textWrap: kWrap.wrapOnWords
 	},
 	
 	buttonHover: {

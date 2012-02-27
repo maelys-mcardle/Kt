@@ -27,16 +27,14 @@ function kWindow(kCanvasObject)
 kWindow.prototype.run = 
 function()
 {
-	// Update layouts.
-	if (typeof this.rootLayout.updateLayout != "undefined")
-		this.rootLayout.updateLayout(0, 0, this.canvas.canvas.width,
-			this.canvas.canvas.height);
-	
 	// Send user interaction off to widgets.
 	this.updateWidgets();
 	
 	// Draw the background and the widgets.
 	this.drawWindow();
+
+	// Update layouts.
+	this.updateLayouts();
 	
 	// Wait before running the event loop again.
 	kWindowInstance = this;
@@ -45,13 +43,21 @@ function()
 }
 
 // =====================================================================
-// SET WINDOW LAYOUT
+// SET/UPDATE WINDOW LAYOUT
 // =====================================================================
 
 kWindow.prototype.setLayout = 
 function(kLayoutObject)
 {
 	this.rootLayout = kLayoutObject;
+}
+
+kWindow.prototype.updateLayouts = 
+function()
+{
+	if (typeof this.rootLayout.updateLayout != "undefined")
+		this.rootLayout.updateLayout(0, 0, this.canvas.canvas.width,
+			this.canvas.canvas.height);
 }
 
 // =====================================================================
