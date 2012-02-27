@@ -8,7 +8,7 @@ var kStyle =
 	default: {
 		
 		widthPolicy: kLayoutPolicy.dynamic,
-		heightPolicy: kLayoutPolicy.static,
+		heightPolicy: kLayoutPolicy.dynamic,
 		
 		padding: 10,
 		margin: 10,
@@ -65,8 +65,7 @@ var kStyle =
 	},
 	
 	label: {
-		defaultWidth: 500,
-		defaultHeight: 100,
+		heightPolicy: kLayoutPolicy.dynamic,
 		textFont: "Vegur",
 		textColour: "white",
 		textHeight: 30,

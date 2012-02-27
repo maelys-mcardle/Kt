@@ -20,7 +20,7 @@ function main(canvasId)
 	button = new kButton(100, 10, 100, 50, "Push");
 	button2 = new kButton(100, 10, 100, 50, "Push");
 	
-	hLayoutTop = new kLayout(mainWindow, kOrientation.vertical);
+	hLayoutTop = new kLayout(mainWindow, kOrientation.horizontal);
 	hLayoutTop.addWidget(label);
 	hLayoutTop.addWidget(button);
 	hLayoutTop.addWidget(button2);

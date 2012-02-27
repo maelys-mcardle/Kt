@@ -43,9 +43,9 @@ function(kLayoutObject)
 kLayout.prototype.updateLayout = 
 function(x, y, maximumWidth, maximumHeight)
 {
-	var availableSpace = maximumWidth;
-	var dynamicItems = 0;
 	var horizontal = (this.orientation == kOrientation.horizontal);
+	var availableSpace = (horizontal) ? maximumWidth : maximumHeight;
+	var dynamicItems = 0;
 	
 	// Go through each item to gather data.
 	for (var i = 0; i < this.items.length; i++) {
