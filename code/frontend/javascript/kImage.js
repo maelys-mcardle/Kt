@@ -12,7 +12,7 @@ function kImage(x, y, width, height, path)
 	this.imagePath = path;
 	
 	// Default style.
-	this.style = kStyle.image;
+	this.style = getStyle(kStyle.image);
 }
 
 // =====================================================================

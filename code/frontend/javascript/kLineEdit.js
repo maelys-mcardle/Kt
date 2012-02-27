@@ -16,7 +16,7 @@ function kLineEdit(x, y, width, height, text)
 	this.cursorVisible = false;
 	this.displayedTextOffset = 0;
 	this.displayedTextData = 0;
-	this.style = kStyle.lineEdit;
+	this.style = getStyle(kStyle.lineEdit);
 }
 
 // =====================================================================

@@ -7,17 +7,19 @@ function kButton(x, y, width, height, text)
 	// Store the properties from function parameters.
 	this.x = x;
 	this.y = y;
+	this.baseWidth = width;
+	this.baseHeight = height;
 	this.width  = width;
 	this.height = height;
 	this.text   = text;
 	
 	// Default style.
-	this.style = kStyle.button;
+	this.style = getStyle(kStyle.button);
 	
 	// Style for different object states.
-	this.styleIdle  = kStyle.button;
-	this.styleHover = kStyle.buttonHover;
-	this.stylePush  = kStyle.buttonPush;
+	this.styleIdle  = getStyle(kStyle.button);
+	this.styleHover = getStyle(kStyle.buttonHover);
+	this.stylePush  = getStyle(kStyle.buttonPush);
 }
 
 // =====================================================================

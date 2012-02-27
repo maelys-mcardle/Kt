@@ -59,7 +59,7 @@ kCanvas.prototype.loadStyle =
 function(style)
 {
 	// Load in defaults into uninitialized properties.
-	initializeStyle(style);
+	getStyle(style);
 	
 	// Load in properties defined by the style.
 	this.context.strokeStyle = style.lineColour;

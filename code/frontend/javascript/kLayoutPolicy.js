@@ -5,6 +5,6 @@ const kLayoutPolicy =
 	vertical:   1,
 	
 	// Whether to allow the widget to expand, or keep it static.
-	expand: 2,
-	fixed: 3
+	static: 2,
+	dynamic: 3
 };

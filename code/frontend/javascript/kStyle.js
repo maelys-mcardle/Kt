@@ -7,8 +7,8 @@ var kStyle =
 	// The default for all objects until initialized otherwise.
 	default: {
 		
-		widthPolicy: kLayoutPolicy.expanding,
-		heightPolicy: kLayoutPolicy.fixed,
+		widthPolicy: kLayoutPolicy.dynamic,
+		heightPolicy: kLayoutPolicy.static,
 		
 		padding: 10,
 		margin: 10,
@@ -110,6 +110,11 @@ var kStyle =
 	image: {
 		imagePolicy: kImagePolicy.stretch,
 		imageAlign: kAlign.center + kAlign.top
+	},
+	
+	layout: {
+		widthPolicy: kLayoutPolicy.dynamic,
+		heightPolicy: kLayoutPolicy.dynamic
 	}
 };
 
@@ -117,7 +122,7 @@ var kStyle =
 // LOAD DEFAULTS/PARENT VALUES INTO STYLE
 // =====================================================================
 
-function initializeStyle(style)
+function getStyle(style)
 {
 	// List the properties of the default style.
 	var properties = Object.keys(kStyle.default);
@@ -151,4 +156,6 @@ function initializeStyle(style)
 		if (typeof style[propertyName] == "undefined")
 			style[propertyName] = kStyle.default[propertyName];
 	}
+	
+	return style;
 }
