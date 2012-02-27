@@ -67,7 +67,7 @@ function(x, y, maximumWidth, maximumHeight)
 			dynamicItems++;
 		
 		if (typeof item.style.margin == "number")
-			availableSpace -= item.style.margin;
+			availableSpace -= item.style.margin*2;
 		
 	}
 	
@@ -83,16 +83,12 @@ function(x, y, maximumWidth, maximumHeight)
 		
 		// Shortcut to the item.
 		var item = this.items[i];
-		
-		// Include the margin before the item.
-		if (horizontal && typeof item.style.margin == "number")
-			xPosition += item.style.margin;
-		if (!horizontal && typeof item.style.margin == "number")
-			yPosition += item.style.margin;
+		var margin = (typeof item.style.margin == "number") ?
+			item.style.margin : 0;
 		
 		// Update the item position.
-		item.x = xPosition;
-		item.y = yPosition;
+		item.x = xPosition + margin;
+		item.y = yPosition + margin;
 		
 		// Resize the item to fit, and append the margin that's after
 		// the item.
@@ -100,16 +96,16 @@ function(x, y, maximumWidth, maximumHeight)
 			item.width = (item.style.widthPolicy == 
 				kLayoutPolicy.static)? item.baseWidth : dynamicItemSize;
 			item.height = (item.style.heightPolicy == 
-				kLayoutPolicy.static)? item.baseHeight : maximumHeight;
-			xPosition += (typeof item.style.margin == "number") ? 
-				item.style.margin + item.width : item.width;
+				kLayoutPolicy.static)? item.baseHeight : maximumHeight -
+				2*margin;
+			xPosition = margin + item.width + item.x;
 		} else {
 			item.width = (item.style.widthPolicy == 
-				kLayoutPolicy.static)? item.baseWidth : maximumWidth;
+				kLayoutPolicy.static)? item.baseWidth : maximumWidth - 
+				2 * margin;
 			item.height = (item.style.heightPolicy == 
 				kLayoutPolicy.static)? item.baseHeight : dynamicItemSize;
-			yPosition += (typeof item.style.margin == "number") ? 
-				item.style.margin + item.height : item.height;
+			yPosition = margin + item.height + item.y;
 		}
 	}
 }
