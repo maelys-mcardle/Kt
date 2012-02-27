@@ -189,8 +189,10 @@ function()
 	this.canvas.drawBackground(kStyle.background);
 	
 	// Go widget by widget and draw it.
-	for (var i = 0; i < this.widgets.length; i++)
-		this.widgets[i].draw(this.canvas);
+	for (var i = 0; i < this.widgets.length; i++) {
+		if (typeof this.widgets[i].draw != "undefined")
+			this.widgets[i].draw(this.canvas);
+	}
 	
 	// Render the canvas.
 	this.canvas.render();

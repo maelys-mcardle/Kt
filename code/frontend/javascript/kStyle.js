@@ -75,6 +75,11 @@ var kStyle =
 		textWrap: kWrap.wrapOnWords
 	},
 	
+	spacer: {
+		widthPolicy: kLayoutPolicy.dynamic,
+		heightPolicy: kLayoutPolicy.dynamic
+	},
+	
 	lineEdit: {
 		fillColour: "white",
 		lineColour: "black",

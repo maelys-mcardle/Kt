@@ -20,6 +20,7 @@ function main(canvasId)
 	button = new kButton(100, 10, 100, 50, "Push");
 	label2 = new kLabel(0, 0, 300, 50, "Child Wee");
 	button2 = new kButton(100, 10, 100, 50, "Childish");
+	spacer = new kSpacer(0,0, 100, 50);
 	
 	hLayoutTop = new kLayout(mainWindow, kOrientation.horizontal);
 	hLayoutTop.addWidget(label);
@@ -28,6 +29,7 @@ function main(canvasId)
 	vLayoutTop = new kLayout(hLayoutTop, kOrientation.vertical);
 	vLayoutTop.addWidget(label2);
 	vLayoutTop.addWidget(button2);
+	vLayoutTop.addWidget(spacer);
 	
 	mainWindow.run();
 }
