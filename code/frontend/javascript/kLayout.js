@@ -2,14 +2,25 @@
 // BASE FUNCTION
 // =====================================================================
 
-function kLayout(kWindowObject, orientation)
+function kLayout(parentObject, orientation)
 {
 	// Create an empty array to store the layout and widgets.
 	this.items = new Array();
 	
 	// Store the window & orientation defined for this layout.
 	this.orientation = orientation;
-	this.window = kWindowObject;
+	
+	// Add the layout to the parent, another instance of kLayout.
+	if (typeof parentObject.addLayout != "undefined") {
+		parentObject.addLayout(this);
+		this.window = parentObject.window;
+	}
+	
+	// Add the layout to the parent, an instance of kWindow.
+	else if (typeof parentObject.setLayout != "undefined") {
+		parentObject.setLayout(this);
+		this.window = parentObject;
+	}
 }
 
 // =====================================================================

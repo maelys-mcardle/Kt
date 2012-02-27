@@ -25,11 +25,9 @@ function main(canvasId)
 	hLayoutTop.addWidget(label);
 	hLayoutTop.addWidget(button);
 	
-	vLayoutTop = new kLayout(mainWindow, kOrientation.vertical);
+	vLayoutTop = new kLayout(hLayoutTop, kOrientation.vertical);
 	vLayoutTop.addWidget(label2);
 	vLayoutTop.addWidget(button2);
-	hLayoutTop.addLayout(vLayoutTop);	
 	
-	mainWindow.setLayout(hLayoutTop);
 	mainWindow.run();
 }
