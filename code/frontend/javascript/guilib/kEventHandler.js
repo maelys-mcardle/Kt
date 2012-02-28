@@ -17,20 +17,17 @@ function kEventHandler()
 	this.dragThresholdReached = false;
 	this.dragMode = false;
 	
+	// Set the handler to capture UI interactions.
+	var kEventHandlerInstance = this;
+	var handler = function() { kEventHandlerInstance.appendEvent(); };
+	
 	// Add handlers to capture UI interactions.
-	kEventHandlerInstance = this;
-	window.addEventListener("mousemove", 
-		function() {kEventHandlerInstance.appendEvent();});
-	window.addEventListener("click", 
-		function() {kEventHandlerInstance.appendEvent();});
-	window.addEventListener("dblclick", 
-		function() {kEventHandlerInstance.appendEvent();});
-	window.addEventListener("mousedown", 
-		function() {kEventHandlerInstance.appendEvent();});
-	window.addEventListener("mouseup", 
-		function() {kEventHandlerInstance.appendEvent();});
-	window.addEventListener("keydown", 
-		function() {kEventHandlerInstance.appendEvent();});
+	window.addEventListener("mousemove", handler);
+	window.addEventListener("click",     handler);
+	window.addEventListener("dblclick",  handler);
+	window.addEventListener("mousedown", handler);
+	window.addEventListener("mouseup",   handler);
+	window.addEventListener("keydown",   handler);
 }
 
 // =====================================================================
