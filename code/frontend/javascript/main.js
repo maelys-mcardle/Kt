@@ -16,11 +16,11 @@ function main(canvasId)
 	//label = new kWidget(kLabel, 20, 20, 300, 100, "Korgi is fun");
 	// mainWindow.addWidget(label);
 	
-	label = new kLabel(0, 0, 300, 50, "Korgi Widgets");
-	button = new kButton(100, 10, 100, 50, "Push");
-	label2 = new kLabel(0, 0, 300, 50, "Child Wee");
-	button2 = new kButton(100, 10, 100, 50, "Childish");
-	spacer = new kSpacer(0,0, 100, 50);
+	label = new kLabel("Korgi Widgets", 300, 50);
+	button = new kButton("Push", 100, 50);
+	label2 = new kLabel("Child Wee", 300, 50);
+	button2 = new kButton("Childish", 100, 50);
+	spacer = new kSpacer(100, 50);
 	
 	hLayoutTop = new kLayout(mainWindow, kOrientation.horizontal);
 	hLayoutTop.addWidget(label);

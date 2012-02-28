@@ -2,11 +2,11 @@
 // BASE FUNCTION
 // =====================================================================
 
-function kButton(x, y, width, height, text)
+function kButton(text, width, height, x, y)
 {
 	// Store the properties from function parameters.
-	this.x = x;
-	this.y = y;
+	this.x = optionalParameter(0, x);
+	this.y = optionalParameter(0, y);
 	this.baseWidth  = width;
 	this.baseHeight = height;
 	this.width  = width;
