@@ -1,4 +1,4 @@
-const kGlobal = 
+const kGuiSettings = 
 {
 	// The length of time to wait, in milliseconds, between window
 	// event loop processing routines.

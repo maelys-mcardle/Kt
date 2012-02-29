@@ -39,7 +39,7 @@ function()
 	// Wait before running the event loop again.
 	kWindowInstance = this;
 	setTimeout(function() { kWindowInstance.run(); }, 
-		kGlobal.eventLoopDelay);
+		kGuiSettings.eventLoopDelay);
 }
 
 // =====================================================================

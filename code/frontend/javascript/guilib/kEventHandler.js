@@ -51,8 +51,8 @@ function()
 		// has been reached.
 		if (this.dragMode && !this.dragThresholdReached && 
 			(Math.abs(this.mouseX - this.dragStartX) > 
-			kGlobal.dragThreshold || Math.abs(this.mouseY - 
-			this.dragStartY) > kGlobal.dragThreshold))
+			kGuiSettings.dragThreshold || Math.abs(this.mouseY - 
+			this.dragStartY) > kGuiSettings.dragThreshold))
 			this.dragThresholdReached = true;
 	
 		// If the drag threshold has been reached, this is a mouse drag.
