@@ -39,7 +39,17 @@ function(data)
 kSocket.prototype.send =
 function(data)
 {
-	this.socket.send(data);
+	// Try sending the data over the socket. 
+	// Return true on success.
+	try {
+		this.socket.send(data);
+		return true;
+	}
+	
+	// Return false if the data could not be sent.
+	catch (error) {
+		return false;
+	}
 }
 
 kSocket.prototype.receive =

@@ -18,7 +18,8 @@ function main(canvasId)
 	vLayoutTop.addWidget(button2);
 	vLayoutTop.addWidget(spacer);
 	
-	socket = kSocket("ws://localhost/");
+	socket = new kSocket("ws://localhost/");
+	socket.send("Hello");
 	
 	mainWindow.run();
 }
