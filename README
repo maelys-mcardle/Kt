@@ -17,7 +17,7 @@ THE KT COMPILER
 
  Options: Paths
  ==============
- -k Kt path. This is the file path to the Kt directory, which contains
+ -k Kt path. This is the file path to the Kt framework, which contains
     this file and the source code. By default, the compiler assumes that
     this is the current working directory.
  
@@ -35,7 +35,14 @@ THE KT COMPILER
  
  -t Window title.
  
+ Options: Miscellaneous
+ ===========================
+ -n No execution. Do not execute the binary after compilation.
+ 
 EXAMPLES
  ./compiler -i "examples/hello world" -t "Hello World"
 
- ./compiler -w 1024 -h 768 -o "../test" -i "examples/button" -k "."
+ ./compiler -i "examples/hello world" -n
+ 
+ ./compiler -w 1024 -h 768 -o "../calculator-compiled" \
+	-i "examples/calculator" -t "Calculator"

@@ -1,6 +1,3 @@
-//#include "test space.js"
-//#include "other file.js"
-
 function main(canvasId) 
 {
 	// Setup the surface for the widgets.

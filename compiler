@@ -7,9 +7,10 @@ WINDOW_TITLE="Kt Window"
 KT_DIRECTORY="."
 INPUT_DIRECTORY="."
 OUTPUT_DIRECTORY="../release"
+EXECUTE="yes"
 
 # Parse the command-line arguments.
-while getopts " w: h: t: o: i: " option
+while getopts " w: h: t: o: i: n" option
 do
 case $option in
 h ) WINDOW_HEIGHT=$OPTARG;;
@@ -17,6 +18,7 @@ w ) WINDOW_WIDTH=$OPTARG;;
 t ) WINDOW_TITLE="$OPTARG";;
 i ) INPUT_DIRECTORY="$OPTARG";;
 o ) OUTPUT_DIRECTORY="$OPTARG";;
+n ) EXECUTE="no";;
 ? | * ) cat README;exit;;
 esac;
 done
@@ -52,5 +54,6 @@ qmake
 make
 
 # Execute the interpreter.
-./Kt
-
+if [ $EXECUTE = "yes" ]; then
+	./Kt;
+fi
