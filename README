@@ -1,13 +1,41 @@
-Korgi
+Kt
 
-A visual programming IDE built with Qt/C++ (backend) and 
-HTML5/Javascript (frontend).
+DESCRIPTION
+ Kt is a framework to allow for the development of graphical user
+ interfaces using JavaScript. 
+ 
+SOURCE CODE REQUIREMENTS
+ Your source code must include a main() function which will be executed
+ on program start. Includes of other source files is done by using the
+ //#include "relative/path/to/file" directive. See the examples 
+ directory to see this in action.
 
-To compile, run:
-	qmake
+THE KT COMPILER
+ Executing the Compiler
+ ======================
+ ./compiler [OPTIONS]
 
-Followed by:
-	make
+ Options: Paths
+ ==============
+ -k Kt path. This is the file path to the Kt directory, which contains
+    this file and the source code. By default, the compiler assumes that
+    this is the current working directory.
+ 
+ -i Input path. This is where your javascript source code, including
+    your source with the main() function, is located.   
+    
+ -o Output path. This is where your program will be compiled. If this
+    is undefined, the output path is assumed to be ../release.
+    
+ Options: Application Window
+ ===========================
+ -h Window height, in pixels.
 
-To run, do:
-	./korgi
+ -w Window width, in pixels.
+ 
+ -t Window title.
+ 
+EXAMPLES
+ ./compiler -i "examples/hello world" -t "Hello World"
+
+ ./compiler -w 1024 -h 768 -o "../test" -i "examples/button" -k "."

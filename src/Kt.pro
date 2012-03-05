@@ -1,7 +1,6 @@
 QT       += core gui webkit
 
-TARGET = kT
+TARGET = Kt
 TEMPLATE = app
 
 SOURCES += main.cpp
-

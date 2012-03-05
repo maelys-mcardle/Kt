@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Set defaults
+WINDOW_WIDTH=640
+WINDOW_HEIGHT=480
+WINDOW_TITLE="Kt Window"
+KT_DIRECTORY="."
+INPUT_DIRECTORY="."
+OUTPUT_DIRECTORY="../release"
+
+# Parse the command-line arguments.
+while getopts " w: h: t: o: i: " option
+do
+case $option in
+h ) WINDOW_HEIGHT=$OPTARG;;
+w ) WINDOW_WIDTH=$OPTARG;;
+t ) WINDOW_TITLE="$OPTARG";;
+i ) INPUT_DIRECTORY="$OPTARG";;
+o ) OUTPUT_DIRECTORY="$OPTARG";;
+? | * ) cat README;exit;;
+esac;
+done
+
+# Copying the base-level code to the output directory.
+cp -v -R "$KT_DIRECTORY/src" "$OUTPUT_DIRECTORY"
+
+# Copying the user's source code to the output directory.
+cp -v -R "$INPUT_DIRECTORY/"* "$OUTPUT_DIRECTORY/html/javascript"
+
+# Searching the source code for includes. Translate them into includes
+# for the html file.
+grep -h -R "//#include" "$INPUT_DIRECTORY" |\
+sed 's/.*"\(.*\)".*/\1/g' |\
+sed 's/^/\t<script src=\"javascript\//;s/$/\"><\/script>/' | cat \
+> "$OUTPUT_DIRECTORY/html/includes.htm"
+
+# Create the index file.
+cat "$OUTPUT_DIRECTORY/html/header.htm" \
+"$OUTPUT_DIRECTORY/html/includes.htm" \
+"$OUTPUT_DIRECTORY/html/footer.htm" \
+> "$OUTPUT_DIRECTORY/html/index.htm"
+
+# Create the header file for the interpreter.
+echo "#define WINDOW_WIDTH $WINDOW_WIDTH
+#define WINDOW_HEIGHT $WINDOW_HEIGHT
+#define WINDOW_TITLE \"$WINDOW_TITLE\"" \
+> "$OUTPUT_DIRECTORY/main.h"
+
+# Compile the interpreter.
+cd "$OUTPUT_DIRECTORY"
+qmake
+make
+
+# Execute the interpreter.
+./Kt
+

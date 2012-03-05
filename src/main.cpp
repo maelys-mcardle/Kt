@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include <QWebView>
 #include <QWebFrame>
+#include "main.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,8 +12,8 @@ int main(int argc, char *argv[])
 	view->load(QUrl("html/index.htm"));
 
 	// Set window properties.
-	view->setBaseSize(640, 480);
-	view->setWindowTitle("kT Window");
+	view->setBaseSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	view->setWindowTitle(WINDOW_TITLE);
 
 	// Disable scrollbars.
 	view->page()->mainFrame()->
