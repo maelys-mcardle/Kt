@@ -1,14 +1,12 @@
 Kt
 
 DESCRIPTION
- Kt is a framework to allow for the development of graphical user
- interfaces using JavaScript. 
+ Kt is a framework that allows you to develop desktop applications 
+ with JavaScript.
  
-SOURCE CODE REQUIREMENTS
- Your source code must include a main() function which will be executed
- on program start. Includes of other source files is done by using the
- //#include "relative/path/to/file" directive. See the examples 
- directory to see this in action.
+SOFTWARE REQUIREMENTS
+ You must have the Qt development tools installed, as well as the
+ standard UNIX suite of tools (sed, grep, etc.)
 
 THE KT COMPILER
  Executing the Compiler
@@ -39,10 +37,25 @@ THE KT COMPILER
  ===========================
  -n No execution. Do not execute the binary after compilation.
  
-EXAMPLES
+COMPILATION EXAMPLES
  ./compiler -i "examples/hello world" -t "Hello World"
 
  ./compiler -i "examples/hello world" -n
  
  ./compiler -w 1024 -h 768 -o "../calculator-compiled" \
 	-i "examples/calculator" -t "Calculator"
+
+JAVASCRIPT CODE REQUIREMENTS
+ Your source code must include a "main.js" file in which a main()
+ function is defined. This is the first function that will be executed
+ when your application starts.
+
+ The main() function will be called with a single parameter, identifying
+ the identifier of the HTML canvas element used by the software to draw
+ on. To use the included widgets, you will need to pass this identifier
+ to a kCanvas element. Please see the examples for demonstrations.
+
+ Including other source files is achieved by including a line that uses
+ the following pattern in your source code:
+   //#include "relative/path/to/file.js"
+ 
