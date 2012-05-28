@@ -3,6 +3,9 @@ Kt
 DESCRIPTION
  Kt is a framework that allows you to develop desktop applications 
  with JavaScript.
+
+AUTHOR
+ Julien McArdle (www.jmcardle.com)
  
 SOFTWARE REQUIREMENTS
  You must have the Qt development tools installed, as well as the
